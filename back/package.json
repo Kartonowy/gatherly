@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "src/index.ts",
   "scripts": {
-    "start": "nodemon --watch \"src/**/*\" --ext 'ts,json'"
+    "start": "npx tsx src/index.ts",
+    "apply": "npx drizzle-kit push"
   },
   "author": "",
   "license": "ISC",
@@ -11,12 +12,16 @@
   "type": "module",
   "devDependencies": {
     "@types/node": "^22.13.1",
-    "nodemon": "^3.1.9",
-    "ts-node": "^10.9.2",
+    "@types/pg": "^8.11.11",
+    "drizzle-kit": "^0.30.4",
+    "tsx": "^4.19.2",
     "typescript": "^5.7.3"
   },
   "dependencies": {
     "@elysiajs/node": "^1.2.5",
-    "elysia": "^1.2.12"
+    "dotenv": "^16.4.7",
+    "drizzle-orm": "^0.39.3",
+    "elysia": "^1.2.12",
+    "pg": "^8.13.3"
   }
 }
