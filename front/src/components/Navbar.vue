@@ -12,5 +12,10 @@ import { RouterLink } from 'vue-router';
 </template>
 
 <style scoped>
-    
+    nav {
+        width: 100vw;
+        display: flex;
+        justify-content: space-evenly;
+
+}
 </style>

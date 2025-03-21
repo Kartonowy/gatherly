@@ -12,4 +12,8 @@ import Navbar from './components/Navbar.vue';
 </template>
 
 <style scoped>
+main {
+    min-width: 80vw;
+    min-height: 80vh;
+}
 </style>
