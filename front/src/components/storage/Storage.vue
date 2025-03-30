@@ -1,11 +1,14 @@
 <script setup lang="ts">
-
+import Sleeve from './Sleeve.vue';
 
 </script>
 
 <template>
 
-    <h1>Storage</h1>
+    <div v-for="n in 8">
+        <Sleeve />
+    </div>
+
 </template>
 
 <style scoped>
