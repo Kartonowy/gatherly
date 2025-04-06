@@ -2,15 +2,14 @@
 import Label from './Label.vue';
 import OptionsButton from './OptionsButton.vue';
 
-import { useDraggable } from '@vueuse/core';
-import { useTemplateRef } from 'vue';
+import { useDraggable, useElementHover } from '@vueuse/core';
+import { ref, useTemplateRef } from 'vue';
 
-let url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
 
-type Sleeve = {
-    label: string,
-    url: string,
-}
+const props = defineProps({
+    label: String,
+    url: String
+});
 
 
 const el = useTemplateRef<HTMLElement>('el')
@@ -18,13 +17,14 @@ const el = useTemplateRef<HTMLElement>('el')
 const { x, y, style} = useDraggable(el, {
     initialValue: { x: 40, y: 40}
 })
+const isHovered = useElementHover(el);
 
 </script>
 <template>
     <div class="sleeve-container" ref="el" :style="style" style="position: fixed;">
         <div>
-            <Label text-raw="Item 1" />
-            <a :href="url">{{ url }}</a>
+            <Label :text-raw="props.label" />
+            <a :style="!isHovered ? 'display: none' : '' " :href="props.url">{{ props.url }}</a>
         </div>
         <OptionsButton />
     </div>
@@ -35,14 +35,27 @@ const { x, y, style} = useDraggable(el, {
         display: flex;
         flex-flow: row wrap;
         border:slategrey 1px solid;
-        max-width: fit-content;
+        width: 250px;
         border-radius: 25px;
         padding: 0.5vmin;
+        align-items: center;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
     }
+
 
     a {
         all: unset;
         color: midnightblue;
         font-size: 1.5vmin;
+        max-width: 50px;
+        width: 50px;
+        overflow: hidden;
+        text-overflow: clip;
     }
+
 </style>
