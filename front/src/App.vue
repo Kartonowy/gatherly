@@ -1,18 +1,20 @@
 <script setup lang="ts">
-import Navbar from './components/Navbar.vue';
+// import Navbar from './components/Navbar.vue';
+import Dashboard from './components/dashboard/Dashboard.vue';
 
 
 </script>
 
 <template>
-    <Navbar/>
+    <!-- <Navbar/> -->
     <main>
         <RouterView/>
     </main>
+    <Dashboard />
 </template>
 
 <style scoped>
 main {
-    min-width: 80vw;
+    width: 95%;
 }
 </style>
