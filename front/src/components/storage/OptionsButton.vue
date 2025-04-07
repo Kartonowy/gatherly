@@ -9,8 +9,8 @@
 
 <style scoped>
     button {
-        width: 3.5vw;
-        height: 3.5vw;
+        width: 20%;
+        height: 100%;
         border-radius: 25px;
     }
 </style>

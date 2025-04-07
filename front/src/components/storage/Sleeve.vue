@@ -22,7 +22,7 @@ const isHovered = useElementHover(el);
 </script>
 <template>
     <div class="sleeve-container" ref="el" :style="style" style="position: fixed;">
-        <div>
+        <div class="content-container">
             <Label :text-raw="props.label" />
             <a :style="!isHovered ? 'display: none' : '' " :href="props.url">{{ props.url }}</a>
         </div>
@@ -36,6 +36,7 @@ const isHovered = useElementHover(el);
         flex-flow: row wrap;
         border:slategrey 1px solid;
         width: 250px;
+height: 4vw;
         border-radius: 25px;
         padding: 0.5vmin;
         align-items: center;
@@ -47,6 +48,11 @@ const isHovered = useElementHover(el);
         user-select: none;
     }
 
+    .content-container {
+        width: 80%;
+height: 100%;
+}
+
 
     a {
         all: unset;
@@ -55,7 +61,8 @@ const isHovered = useElementHover(el);
         max-width: 50px;
         width: 50px;
         overflow: hidden;
-        text-overflow: clip;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 
 </style>
