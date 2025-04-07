@@ -1,11 +1,13 @@
 <script setup lang="ts">
+import Storage from './storage/Storage.vue';
 
-defineProps<{ name: string }>();
+
 
 </script>
 
 <template>
-  <h1>{{ name }}</h1>
+
+    <Storage></Storage>
 
 
 </template>
