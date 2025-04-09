@@ -10,7 +10,7 @@ const items = ref(sleeves)
 <template>
 
     <div v-for="item in items">
-        <Sleeve :label="item.label" :url="item.url" />
+        <Sleeve :label="item.label" :url="item.url" :position="item.position"/>
     </div>
 
 </template>

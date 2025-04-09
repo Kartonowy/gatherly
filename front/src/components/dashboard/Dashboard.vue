@@ -9,8 +9,8 @@
         ["add", () => {}],
         ["sort", () => {}],
         ["filter", () => {}],
-        [4, () => {}],
-        [5, () => {}],
+        ["categories", () => {}],
+        ["profile", () => {}],
         ["???", () => {}]
     ];
 
@@ -19,7 +19,7 @@
 <template>
     <div class="container-dashboard">
         <div class="tile" v-for="tile in tiles">
-            {{ tile }}
+            {{ tile[0] }}
         </div>
     </div>
 
@@ -28,9 +28,12 @@
 <style scoped>
 .container-dashboard {
     width: 5%;
+    height: 100vh;
     outline: 1px red solid;
     display: flex;
     flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
 }
 .tile {
     outline: 1px blue solid;
