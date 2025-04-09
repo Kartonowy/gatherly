@@ -3,20 +3,28 @@ import Label from './Label.vue';
 import OptionsButton from './OptionsButton.vue';
 
 import { useDraggable, useElementHover } from '@vueuse/core';
-import { ref, useTemplateRef } from 'vue';
+import { useTemplateRef } from 'vue';
 
 
-const props = defineProps({
-    label: String,
-    url: String
-});
+const props = defineProps<{
+    label: string,
+    url: string,
+    position: {
+        x: number,
+        y: number
+    }
+}>();
 
 
 const el = useTemplateRef<HTMLElement>('el')
 
 const { x, y, style} = useDraggable(el, {
-    initialValue: { x: 40, y: 40}
+    preventDefault: true,
+    initialValue: { x: props.position.x, y: props.position.y}
 })
+
+props.position.x = x.value
+props.position.y = y.value
 const isHovered = useElementHover(el);
 
 </script>
@@ -24,7 +32,7 @@ const isHovered = useElementHover(el);
     <div class="sleeve-container" ref="el" :style="style" style="position: fixed;">
         <div class="content-container">
             <Label :text-raw="props.label" />
-            <a :style="!isHovered ? 'display: none' : '' " :href="props.url">{{ props.url }}</a>
+            <a @click.prevent="" onmousedown="return false" :style="!isHovered ? 'display: none' : '' " :href="props.url">{{ props.url }}</a>
         </div>
         <OptionsButton />
     </div>
@@ -36,7 +44,7 @@ const isHovered = useElementHover(el);
         flex-flow: row wrap;
         border:slategrey 1px solid;
         width: 250px;
-height: 4vw;
+height: 60px;
         border-radius: 25px;
         padding: 0.5vmin;
         align-items: center;
