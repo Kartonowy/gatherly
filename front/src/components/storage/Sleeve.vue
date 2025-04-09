@@ -1,9 +1,11 @@
 <script setup lang="ts">
+import type { SleeveT } from '../../utils/types';
+import { useGlobalState } from '../state';
 import Label from './Label.vue';
 import OptionsButton from './OptionsButton.vue';
 
-import { useDraggable, useElementHover } from '@vueuse/core';
-import { useTemplateRef } from 'vue';
+import { useDraggable, useElementHover, type Position } from '@vueuse/core';
+import { computed, reactive, useTemplateRef, type Ref } from 'vue';
 
 
 const props = defineProps<{
@@ -12,20 +14,36 @@ const props = defineProps<{
     position: {
         x: number,
         y: number
-    }
+    },
 }>();
+
+let { items } = useGlobalState();
 
 
 const el = useTemplateRef<HTMLElement>('el')
 
 const { x, y, style} = useDraggable(el, {
     preventDefault: true,
-    initialValue: { x: props.position.x, y: props.position.y}
+    initialValue: { x: props.position.x, y: props.position.y},
+    onEnd: (position: Position, event: PointerEvent) => {
+        let ouritem = items.find((e) => e.label == props.label && e.url == props.url); // TODO: replace with key/id or REFs
+        if (ouritem) {
+            ouritem.position.x = position.x;
+            ouritem.position.y = position.y;
+        }
+    }, 
 })
 
-props.position.x = x.value
-props.position.y = y.value
 const isHovered = useElementHover(el);
+
+items.push({
+    label: props.label,
+    url: props.url,
+    position: {
+        x: x.value,
+        y: y.value
+    },
+});
 
 </script>
 <template>

@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 import Sleeve from './Sleeve.vue';
+import { useGlobalState } from '../state';
+import { ref } from 'vue';
 import { sleeves } from '../../utils/dummy';
 
-const items = ref(sleeves)
 
 </script>
 
 <template>
 
-    <div v-for="item in items">
-        <Sleeve :label="item.label" :url="item.url" :position="item.position"/>
+    <div v-for="item in sleeves">
+        <Sleeve :key="item.label" :label="item.label" :url="item.url" :position="item.position"/>
     </div>
 
 </template>
