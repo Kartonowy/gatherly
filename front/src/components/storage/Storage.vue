@@ -9,8 +9,8 @@ import { sleeves } from '../../utils/dummy';
 
 <template>
 
-    <div v-for="item in sleeves">
-        <Sleeve :key="item.label" :label="item.label" :url="item.url" :position="item.position"/>
+    <div v-for="(item, index) in sleeves">
+        <Sleeve :key="index" :label="item.label" :url="item.url" :position="item.position"/>
     </div>
 
 </template>

@@ -5,7 +5,7 @@ import Label from './Label.vue';
 import OptionsButton from './OptionsButton.vue';
 
 import { useDraggable, useElementHover, type Position } from '@vueuse/core';
-import { computed, reactive, useTemplateRef, type Ref } from 'vue';
+import { computed, getCurrentInstance, reactive, useTemplateRef, type Ref } from 'vue';
 
 
 const props = defineProps<{
@@ -18,6 +18,7 @@ const props = defineProps<{
 }>();
 
 let { items } = useGlobalState();
+
 
 
 const el = useTemplateRef<HTMLElement>('el')
@@ -34,6 +35,11 @@ const { x, y, style} = useDraggable(el, {
     }, 
 })
 
+const changePos = (newx: number, newy: number) => {
+    x.value = newx
+    y.value = newy
+}
+
 const isHovered = useElementHover(el);
 
 items.push({
@@ -43,6 +49,7 @@ items.push({
         x: x.value,
         y: y.value
     },
+    changePos
 });
 
 </script>

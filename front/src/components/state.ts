@@ -9,12 +9,6 @@ export const useGlobalState = createGlobalState(
     const itemsref = sleeves
     let items: Reactive<SleeveT[]> = reactive([]);
 
-// const plusOne = computed({
-//   get: () => count.value + 1,
-//   set: (val) => {
-//     count.value = val - 1
-//   }
-// })
     return { itemsref, items }
   }
 )
