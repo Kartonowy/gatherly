@@ -44,6 +44,7 @@ const changePos = (newx: number, newy: number) => {
 const isHovered = useElementHover(el);
 
 items.push({
+    sleevekey: key,
     label: props.label,
     url: props.url,
     position: {

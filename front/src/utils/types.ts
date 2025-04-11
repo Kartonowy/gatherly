@@ -1,5 +1,5 @@
 export type SleeveT = {
-    sleevekey: PropertyKey,
+    sleevekey: PropertyKey | null | undefined,
     label: string,
     url: string,
     position: { x: number, y: number },
