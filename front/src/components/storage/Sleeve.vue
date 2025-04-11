@@ -19,6 +19,7 @@ const props = defineProps<{
 
 let { items } = useGlobalState();
 
+const key = getCurrentInstance()?.vnode.key;
 
 
 const el = useTemplateRef<HTMLElement>('el')
@@ -27,7 +28,7 @@ const { x, y, style} = useDraggable(el, {
     preventDefault: true,
     initialValue: { x: props.position.x, y: props.position.y},
     onEnd: (position: Position, event: PointerEvent) => {
-        let ouritem = items.find((e) => e.label == props.label && e.url == props.url); // TODO: replace with key/id or REFs
+        let ouritem = items.find((e) => e.sleevekey == key)
         if (ouritem) {
             ouritem.position.x = position.x;
             ouritem.position.y = position.y;
