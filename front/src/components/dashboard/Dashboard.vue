@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import sort from './sort';
+
 
     type TileBindable = [
         name: string | number,
@@ -7,7 +9,7 @@
 
     const tiles: TileBindable[] = [
         ["add", () => {}],
-        ["sort", () => {}],
+        ["sort", sort],
         ["filter", () => {}],
         ["categories", () => {}],
         ["profile", () => {}],
@@ -18,7 +20,7 @@
 
 <template>
     <div class="container-dashboard">
-        <div class="tile" v-for="tile in tiles">
+        <div @click="tile[1]" class="tile" v-for="tile in tiles">
             {{ tile[0] }}
         </div>
     </div>
