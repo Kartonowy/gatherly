@@ -2,7 +2,7 @@
 import type { SleeveT } from '../../utils/types';
 import { useGlobalState } from '../state';
 import Label from './Label.vue';
-import OptionsButton from './OptionsButton.vue';
+import ContextButton from './ContextButton.vue';
 
 import { useDraggable, useElementHover, type Position } from '@vueuse/core';
 import { computed, getCurrentInstance, reactive, useTemplateRef, type Ref } from 'vue';
@@ -11,10 +11,7 @@ import { computed, getCurrentInstance, reactive, useTemplateRef, type Ref } from
 const props = defineProps<{
     label: string,
     url: string,
-    position: {
-        x: number,
-        y: number
-    },
+    position: Position,
 }>();
 
 let { items } = useGlobalState();
@@ -61,7 +58,7 @@ items.push({
             <Label :text-raw="props.label" />
             <a @click.prevent="" onmousedown="return false" :style="!isHovered ? 'display: none' : '' " :href="props.url">{{ props.url }}</a>
         </div>
-        <OptionsButton />
+        <ContextButton :position="position" :sleeve_key="key"/>
     </div>
 </template>
 
@@ -71,7 +68,7 @@ items.push({
         flex-flow: row wrap;
         border:slategrey 1px solid;
         width: 250px;
-height: 60px;
+        height: 60px;
         border-radius: 25px;
         padding: 0.5vmin;
         align-items: center;

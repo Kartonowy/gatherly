@@ -7,7 +7,12 @@ export const sleeves: Array<SleeveT> = [
         position: {
             x: 0,
             y: 0
-        }
+        },
+        changePos(_newx, _newy) {
+            
+        },
+        sleevekey: null
+
     },
     {
         label: "Muzyka do nauki",
@@ -15,7 +20,11 @@ export const sleeves: Array<SleeveT> = [
         position: {
             x: 0,
             y: 0
-        }
+        },
+        changePos(_newx, _newy) {
+            
+        },
+        sleevekey: null
     },
     {
         label: "Poradnik",
@@ -23,6 +32,10 @@ export const sleeves: Array<SleeveT> = [
         position: {
             x: 0,
             y: 0
-        }
+        },
+        changePos(_newx, _newy) {
+            
+        },
+        sleevekey: null
     }
 ]
