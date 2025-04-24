@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import sort from './sort';
-
+import sort from '../../scripts/sort';
+import { sleeves } from '../../utils/dummy';
 
     type TileBindable = [
         name: string | number,
@@ -8,7 +8,14 @@ import sort from './sort';
     ];
 
     const tiles: TileBindable[] = [
-        ["add", () => {}],
+    ["add", () => { 
+        sleeves.addSleeve({
+        label: prompt("label")!,
+        url: prompt("url")!,
+        position: { x: 0, y: 0},
+
+    })
+    }],
         ["sort", sort],
         ["filter", () => {}],
         ["categories", () => {}],

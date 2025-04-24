@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { reactive } from 'vue';
 import type { Position } from '../../utils/types';
-import { useGlobalState } from '../state';
+import { useGlobalState } from '../../scripts/state.ts';
 
 
 const props = defineProps<{

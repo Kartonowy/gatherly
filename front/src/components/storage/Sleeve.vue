@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import type { SleeveT } from '../../utils/types';
-import { useGlobalState } from '../state';
+import { useGlobalState } from '../../scripts/state';
 import Label from './Label.vue';
 import ContextButton from './ContextButton.vue';
 
 import { useDraggable, useElementHover, type Position } from '@vueuse/core';
-import { computed, getCurrentInstance, reactive, useTemplateRef, type Ref } from 'vue';
+import { getCurrentInstance, useTemplateRef } from 'vue';
 
 
 const props = defineProps<{
