@@ -13,11 +13,6 @@ export const sleeves: {
                 x: 0,
                 y: 0
             },
-            changePos(_newx, _newy) {
-
-            },
-            sleevekey: null
-
         },
         {
             label: "Muzyka do nauki",
@@ -26,10 +21,6 @@ export const sleeves: {
                 x: 0,
                 y: 0
             },
-            changePos(_newx, _newy) {
-
-            },
-            sleevekey: null
         },
         {
             label: "Poradnik",
@@ -38,10 +29,6 @@ export const sleeves: {
                 x: 0,
                 y: 0
             },
-            changePos(_newx, _newy) {
-
-            },
-            sleevekey: null
         }
     ],
         addSleeve(element: SleeveT) {

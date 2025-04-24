@@ -8,10 +8,11 @@ import { sleeves } from '../../utils/dummy';
     ];
 
     const tiles: TileBindable[] = [
-    ["add", () => { sleeves.addSleeve({
-        label: "choj",
-        url: "dwa",
-        position: { x: 1, y: 2},
+    ["add", () => { 
+        sleeves.addSleeve({
+        label: prompt("label")!,
+        url: prompt("url")!,
+        position: { x: 0, y: 0},
 
     })
     }],
