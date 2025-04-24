@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import Sleeve from './Sleeve.vue';
-import { useGlobalState } from '../state';
-import { ref } from 'vue';
 import { sleeves } from '../../utils/dummy';
 
 
@@ -9,7 +7,7 @@ import { sleeves } from '../../utils/dummy';
 
 <template>
 
-    <div v-for="(item, index) in sleeves">
+    <div class="sleeve-storage" v-for="(item, index) in sleeves.sleeves">
         <Sleeve :key="index" :label="item.label" :url="item.url" :position="item.position"/>
     </div>
 

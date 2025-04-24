@@ -1,6 +1,6 @@
 import { createGlobalState } from '@vueuse/core'
 
-import { shallowRef, ref, type Ref, computed, reactive, type Reactive } from 'vue'
+import { reactive, type Reactive } from 'vue'
 import { sleeves } from '../utils/dummy'
 import type { SleeveT } from '../utils/types'
 
