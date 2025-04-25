@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import type { Position } from '../../utils/types';
+import { SleeveT, type Position } from '../../utils/types';
 import { useGlobalState } from '../../scripts/state.ts';
+import { getUserSleeveInfo } from '../../scripts/getUserItem.ts';
 
 
 const props = defineProps<{
@@ -20,14 +21,19 @@ type TileBindable = [
     bind: () => void
 ];
 
-const {items} = useGlobalState()
+const { getItem } = useGlobalState()
 
 const tiles: TileBindable[] = [
     ["open", () => {
-        let ouritem = items.find((e) => e.sleevekey == props.sleeve_key)
+        let ouritem = getItem(props.sleeve_key!)
         window.open(ouritem?.url, '_blank')
     }],
-    ["edit", () => {}],
+    ["edit", () => {
+        let ouritem = getItem(props.sleeve_key!)
+        let info = getUserSleeveInfo()
+        console.log(ouritem)
+        ouritem?.changeItem(info.label, info.url)
+    }],
     ["tag", () => {}],
     ["categories", () => {}],
     ["highlight", () => {}],

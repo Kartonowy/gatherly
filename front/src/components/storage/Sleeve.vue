@@ -5,6 +5,7 @@ import ContextButton from './ContextButton.vue';
 
 import { useDraggable, useElementHover, type Position } from '@vueuse/core';
 import { getCurrentInstance, useTemplateRef } from 'vue';
+import { SleeveT } from '../../utils/types';
 
 
 const props = defineProps<{
@@ -39,25 +40,18 @@ const changePos = (newx: number, newy: number) => {
 
 const isHovered = useElementHover(el);
 
-items.push({
-    sleevekey: key,
-    label: props.label,
-    url: props.url,
-    position: {
-        x: x.value,
-        y: y.value
-    },
-    changePos
-});
+let sleeve: SleeveT = new SleeveT(props.label, props.url, changePos, key!)
+
+items.push(sleeve);
 
 </script>
 <template>
     <div class="sleeve-container" ref="el" :style="style" style="position: fixed;">
         <div class="content-container">
-            <Label :text-raw="props.label" />
-            <a @click.prevent="" onmousedown="return false" :style="!isHovered ? 'display: none' : '' " :href="props.url">{{ props.url }}</a>
+            <Label :text-raw="sleeve.label" />
+            <a @click.prevent="" onmousedown="return false" :style="!isHovered ? 'display: none' : '' " :href="sleeve.url">{{ sleeve.url }}</a>
         </div>
-        <ContextButton :position="position" :sleeve_key="key"/>
+        <ContextButton :position="position" :sleeve_key="sleeve.sleevekey"/>
     </div>
 </template>
 

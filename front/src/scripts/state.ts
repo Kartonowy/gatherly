@@ -5,10 +5,16 @@ import { sleeves } from '../utils/dummy'
 import type { SleeveT } from '../utils/types'
 
 export const useGlobalState = createGlobalState(
-  () => {
-    const itemsref = sleeves
-    let items: Reactive<SleeveT[]> = reactive([]);
+    () => {
+        const itemsref = sleeves
+        let items: SleeveT[] = reactive([]);
 
-    return { itemsref, items }
-  }
+
+        let getItem = (sleevekey?: PropertyKey) => {
+            return items.find((e) => e.sleevekey == sleevekey)
+        }
+
+
+        return { itemsref, items, getItem }
+    }
 )
