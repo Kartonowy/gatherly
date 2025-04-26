@@ -5,11 +5,10 @@ import { getUserSleeveInfo } from '../../scripts/getUserItem.ts';
 
 
 const props = defineProps<{
-    position: Position,
+    item: SleeveT,
     isContextActive: boolean,
-    sleeve_key: PropertyKey | null | undefined
-    // handler: () => boolean,
 }>();
+const sleeve = props.item
 
 const positionD = {
     left: 'calc(250px - 1.4rem)',
@@ -21,25 +20,22 @@ type TileBindable = [
     bind: () => void
 ];
 
-const { getItem, removeItem } = useGlobalState()
+const { removeItem } = useGlobalState()
 
 const tiles: TileBindable[] = [
     ["open", () => {
-        let ouritem = getItem(props.sleeve_key!)
-        window.open(ouritem?.url.value, '_blank')
+        window.open(sleeve?.url.toString(), '_blank')
     }],
     ["edit", () => {
-        let ouritem = getItem(props.sleeve_key!)
-        console.log(ouritem, props.sleeve_key)
         let info = getUserSleeveInfo()
-        ouritem?.changeItem(info.label, info.url)
+        sleeve?.changeItem(info.label, info.url)
     }],
     ["tag", () => {}],
     ["categories", () => {}],
     ["highlight", () => {}],
     ["delete", () => {
         // todo: add exists test
-        removeItem(props.sleeve_key!)
+        removeItem(sleeve.sleevekey!)
     }]
 ];
 

@@ -19,6 +19,10 @@ export class SleeveT {
         this.position = { x: 0, y: 0 }
         this.changePos = changePos
         this.sleevekey = sleevekey
+        if (!sleevekey) {
+            this.sleevekey = Math.round(Math.random() * Date.now()) / 1000000
+            console.log(this.sleevekey)
+        }
         this.changeItem = (_label: string, _url: string) => {
             this.label.value = _label
             this.url.value = _url

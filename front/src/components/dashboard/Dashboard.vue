@@ -24,7 +24,11 @@ const tiles: TileBindable[] = [
     ["filter", () => {}],
     ["categories", () => {}],
     ["profile", () => {}],
-    ["???", () => {}]
+    ["???", () => {
+        for (let s of sleeves) {
+            addItem(s)
+        } // for development purposes TODO: Delete
+    }]
 ];
 
 </script>

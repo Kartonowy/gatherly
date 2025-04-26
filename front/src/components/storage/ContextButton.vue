@@ -2,24 +2,19 @@
 
 import { ref } from 'vue';
 import ContextWindow from './ContextWindow.vue';
-import type { Position } from '../../utils/types';
+import type { Position, SleeveT } from '../../utils/types';
 
 const props = defineProps<{
-    position: Position,
-    sleeve_key: PropertyKey | null | undefined
+    item: SleeveT
 }>();
 
 const isContextActive = ref(false);
-const position = ref({
-    x: 0,
-    y: 0
-})
 
 </script>
 
 <template>
     <button @click="() => {isContextActive = !isContextActive}">+</button>
-    <ContextWindow :is-context-active="isContextActive" :position="position" :sleeve_key="sleeve_key"/>
+    <ContextWindow :is-context-active="isContextActive" :item="item"/>
 </template>
 
 <style scoped>

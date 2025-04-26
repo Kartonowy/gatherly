@@ -1,17 +1,15 @@
 <script setup lang="ts">
-import { useGlobalState } from '../../scripts/state';
 import Label from './Label.vue';
 import ContextButton from './ContextButton.vue';
 
 import { useDraggable, useElementHover, type Position } from '@vueuse/core';
-import { getCurrentInstance, useTemplateRef } from 'vue';
+import { useTemplateRef } from 'vue';
 import type { SleeveT } from '../../utils/types';
 
 
 const props = defineProps<{
     item: SleeveT
 }>();
-const key = getCurrentInstance()?.vnode.key;
 const sleeve = props.item;
 
 const el = useTemplateRef<HTMLElement>('el')
@@ -36,9 +34,9 @@ sleeve.changePos = (newx: number, newy: number) => {
     <div class="sleeve-container" ref="el" :style="style" style="position: fixed;">
         <div class="content-container">
             <Label :text-raw="sleeve.label" />
-            <a @click.prevent="" onmousedown="return false" :style="!isHovered ? 'display: none' : '' " :href="sleeve.url.toString()">{{ sleeve.url.toString() }}</a>
+            <a :style="!isHovered ? 'display: none' : '' " :href="sleeve.url.toString()">{{ sleeve.url.toString() }}</a>
         </div>
-        <ContextButton :position="item.position" :sleeve_key="key"/>
+        <ContextButton :item="item"/>
     </div>
 </template>
 
