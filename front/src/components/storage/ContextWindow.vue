@@ -21,23 +21,26 @@ type TileBindable = [
     bind: () => void
 ];
 
-const { getItem } = useGlobalState()
+const { getItem, removeItem } = useGlobalState()
 
 const tiles: TileBindable[] = [
     ["open", () => {
         let ouritem = getItem(props.sleeve_key!)
-        window.open(ouritem?.url, '_blank')
+        window.open(ouritem?.url.value, '_blank')
     }],
     ["edit", () => {
         let ouritem = getItem(props.sleeve_key!)
+        console.log(ouritem, props.sleeve_key)
         let info = getUserSleeveInfo()
-        console.log(ouritem)
         ouritem?.changeItem(info.label, info.url)
     }],
     ["tag", () => {}],
     ["categories", () => {}],
     ["highlight", () => {}],
-    ["delete", () => {}]
+    ["delete", () => {
+        // todo: add exists test
+        removeItem(props.sleeve_key!)
+    }]
 ];
 
 </script>

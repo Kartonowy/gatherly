@@ -5,53 +5,40 @@ import ContextButton from './ContextButton.vue';
 
 import { useDraggable, useElementHover, type Position } from '@vueuse/core';
 import { getCurrentInstance, useTemplateRef } from 'vue';
-import { SleeveT } from '../../utils/types';
+import type { SleeveT } from '../../utils/types';
 
 
 const props = defineProps<{
-    label: string,
-    url: string,
-    position: Position,
+    item: SleeveT
 }>();
-
-let { items } = useGlobalState();
-
 const key = getCurrentInstance()?.vnode.key;
-
+const sleeve = props.item;
 
 const el = useTemplateRef<HTMLElement>('el')
-
 const { x, y, style} = useDraggable(el, {
     preventDefault: true,
-    initialValue: { x: props.position.x, y: props.position.y},
-    onEnd: (position: Position, event: PointerEvent) => {
-        let ouritem = items.find((e) => e.sleevekey == key)
-        if (ouritem) {
-            ouritem.position.x = position.x;
-            ouritem.position.y = position.y;
-        }
+    initialValue: { x: sleeve.position.x, y: sleeve.position.y},
+    onEnd: (position: Position, _event: PointerEvent) => {
+        sleeve.position.x = position.x;
+        sleeve.position.y = position.y;
     }, 
 })
+const isHovered = useElementHover(el);
 
-const changePos = (newx: number, newy: number) => {
+sleeve.changePos = (newx: number, newy: number) => {
     x.value = newx
     y.value = newy
 }
 
-const isHovered = useElementHover(el);
-
-let sleeve: SleeveT = new SleeveT(props.label, props.url, changePos, key!)
-
-items.push(sleeve);
 
 </script>
 <template>
     <div class="sleeve-container" ref="el" :style="style" style="position: fixed;">
         <div class="content-container">
             <Label :text-raw="sleeve.label" />
-            <a @click.prevent="" onmousedown="return false" :style="!isHovered ? 'display: none' : '' " :href="sleeve.url">{{ sleeve.url }}</a>
+            <a @click.prevent="" onmousedown="return false" :style="!isHovered ? 'display: none' : '' " :href="sleeve.url.toString()">{{ sleeve.url.toString() }}</a>
         </div>
-        <ContextButton :position="position" :sleeve_key="sleeve.sleevekey"/>
+        <ContextButton :position="item.position" :sleeve_key="key"/>
     </div>
 </template>
 
@@ -75,8 +62,8 @@ items.push(sleeve);
 
     .content-container {
         width: 80%;
-height: 100%;
-}
+        height: 100%;
+    }
 
 
     a {

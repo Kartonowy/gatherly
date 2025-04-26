@@ -3,27 +3,29 @@ import sort from '../../scripts/sort';
 import { sleeves } from '../../utils/dummy';
 import { getUserSleeveInfo } from '../../scripts/getUserItem';
 import { SleeveT } from '../../utils/types';
+import { useGlobalState } from '../../scripts/state';
 
+const { addItem } = useGlobalState()
+type TileBindable = [
+    name: string | number,
+    bind: () => void
+];
 
-    type TileBindable = [
-        name: string | number,
-        bind: () => void
-    ];
-
-    const tiles: TileBindable[] = [
+const tiles: TileBindable[] = [
     ["add", () => { 
         let info = getUserSleeveInfo();
-        sleeves.addSleeve(new SleeveT(
+        addItem(new SleeveT(
             info.label,
-            info.url
+            info.url,
+            Math.round(Math.random() * 1000) // TODO: Replace with hashing based on label and url
         ))
     }],
-        ["sort", sort],
-        ["filter", () => {}],
-        ["categories", () => {}],
-        ["profile", () => {}],
-        ["???", () => {}]
-    ];
+    ["sort", sort],
+    ["filter", () => {}],
+    ["categories", () => {}],
+    ["profile", () => {}],
+    ["???", () => {}]
+];
 
 </script>
 

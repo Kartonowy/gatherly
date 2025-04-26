@@ -1,6 +1,8 @@
+import { nextTick, ref, VueElement, type Ref } from "vue"
+
 export class SleeveT {
-    label: string
-    url: string
+    label: Ref<string>
+    url: Ref<string>
     position: Position
     sleevekey?: PropertyKey | null | undefined
     changePos?: (newx: number, newy: number) => void
@@ -11,15 +13,15 @@ export class SleeveT {
     //     this.position = { x: 0, y: 0 }
     // }
 
-    constructor(label: string, url: string, changePos?: (newx: number, newy: number) => void, sleevekey?: PropertyKey) {
-        this.label = label;
-        this.url = url;
+    constructor(label: string, url: string,  sleevekey?: PropertyKey, changePos?: (newx: number, newy: number) => void,) {
+        this.label = ref(label);
+        this.url = ref(url);
         this.position = { x: 0, y: 0 }
         this.changePos = changePos
         this.sleevekey = sleevekey
         this.changeItem = (_label: string, _url: string) => {
-            this.label = _label;
-            this.url = _url;
+            this.label.value = _label
+            this.url.value = _url
             return
         }
 

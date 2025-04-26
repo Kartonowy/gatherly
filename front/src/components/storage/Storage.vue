@@ -1,14 +1,18 @@
 <script setup lang="ts">
 import Sleeve from './Sleeve.vue';
-import { sleeves } from '../../utils/dummy';
+import { useGlobalState } from '../../scripts/state';
+import { useTemplateRef } from 'vue';
 
+const { state } = useGlobalState()
+
+const itemsRef = useTemplateRef("items")
 
 </script>
 
 <template>
 
-    <div class="sleeve-storage" v-for="(item, index) in sleeves.sleeves">
-        <Sleeve :key="index" :label="item.label" :url="item.url" :position="item.position"/>
+    <div class="sleeve-storage" v-for="item in state.items" ref="items">
+        <Sleeve :key="item.sleevekey!" :item="item" />
     </div>
 
 </template>
