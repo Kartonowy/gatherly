@@ -4,9 +4,9 @@ import './style.css'
 import { createMemoryHistory, createRouter } from 'vue-router'
 
 import Homepage from './components/Homepage.vue'
-import LoginForm from './components/LoginForm.vue'
+import LoginForm from './components/unused/LoginForm.vue'
 import App from './App.vue'
-import RegisterForm from './components/RegisterForm.vue'
+import RegisterForm from './components/unused/RegisterForm.vue'
 import { defaultConfig, plugin } from '@formkit/vue'
 import config from '../formkit.config.ts'
 

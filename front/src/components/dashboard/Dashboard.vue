@@ -1,27 +1,35 @@
 <script setup lang="ts">
 import sort from '../../scripts/sort';
 import { sleeves } from '../../utils/dummy';
+import { getUserSleeveInfo } from '../../scripts/getUserItem';
+import { SleeveT } from '../../utils/types';
+import { useGlobalState } from '../../scripts/state';
 
-    type TileBindable = [
-        name: string | number,
-        bind: () => void
-    ];
+const { addItem } = useGlobalState()
+type TileBindable = [
+    name: string | number,
+    bind: () => void
+];
 
-    const tiles: TileBindable[] = [
+const tiles: TileBindable[] = [
     ["add", () => { 
-        sleeves.addSleeve({
-        label: prompt("label")!,
-        url: prompt("url")!,
-        position: { x: 0, y: 0},
-
-    })
+        let info = getUserSleeveInfo();
+        addItem(new SleeveT(
+            info.label,
+            info.url,
+            Math.round(Math.random() * 1000) // TODO: Replace with hashing based on label and url
+        ))
     }],
-        ["sort", sort],
-        ["filter", () => {}],
-        ["categories", () => {}],
-        ["profile", () => {}],
-        ["???", () => {}]
-    ];
+    ["sort", sort],
+    ["filter", () => {}],
+    ["categories", () => {}],
+    ["profile", () => {}],
+    ["???", () => {
+        for (let s of sleeves) {
+            addItem(s)
+        } // for development purposes TODO: Delete
+    }]
+];
 
 </script>
 

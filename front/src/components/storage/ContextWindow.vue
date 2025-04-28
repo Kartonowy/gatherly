@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import type { Position } from '../../utils/types';
+import { SleeveT, type Position } from '../../utils/types';
 import { useGlobalState } from '../../scripts/state.ts';
+import { getUserSleeveInfo } from '../../scripts/getUserItem.ts';
 
 
 const props = defineProps<{
-    position: Position,
+    item: SleeveT,
     isContextActive: boolean,
-    sleeve_key: PropertyKey | null | undefined
-    // handler: () => boolean,
 }>();
+const sleeve = props.item
 
 const positionD = {
     left: 'calc(250px - 1.4rem)',
@@ -20,18 +20,23 @@ type TileBindable = [
     bind: () => void
 ];
 
-const {items} = useGlobalState()
+const { removeItem } = useGlobalState()
 
 const tiles: TileBindable[] = [
     ["open", () => {
-        let ouritem = items.find((e) => e.sleevekey == props.sleeve_key)
-        window.open(ouritem?.url, '_blank')
+        window.open(sleeve?.url.toString(), '_blank')
     }],
-    ["edit", () => {}],
+    ["edit", () => {
+        let info = getUserSleeveInfo() // TODO: safety switch when user cancels input
+        sleeve?.changeItem(info.label, info.url)
+    }],
     ["tag", () => {}],
     ["categories", () => {}],
     ["highlight", () => {}],
-    ["delete", () => {}]
+    ["delete", () => {
+        // todo: add exists test
+        removeItem(sleeve.sleevekey!)
+    }]
 ];
 
 </script>

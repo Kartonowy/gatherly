@@ -1,63 +1,42 @@
 <script setup lang="ts">
-import { useGlobalState } from '../../scripts/state';
 import Label from './Label.vue';
 import ContextButton from './ContextButton.vue';
 
 import { useDraggable, useElementHover, type Position } from '@vueuse/core';
-import { getCurrentInstance, useTemplateRef } from 'vue';
+import { useTemplateRef } from 'vue';
+import type { SleeveT } from '../../utils/types';
 
 
 const props = defineProps<{
-    label: string,
-    url: string,
-    position: Position,
+    item: SleeveT
 }>();
-
-let { items } = useGlobalState();
-
-const key = getCurrentInstance()?.vnode.key;
-
+const sleeve = props.item;
 
 const el = useTemplateRef<HTMLElement>('el')
-
 const { x, y, style} = useDraggable(el, {
     preventDefault: true,
-    initialValue: { x: props.position.x, y: props.position.y},
-    onEnd: (position: Position, event: PointerEvent) => {
-        let ouritem = items.find((e) => e.sleevekey == key)
-        if (ouritem) {
-            ouritem.position.x = position.x;
-            ouritem.position.y = position.y;
-        }
+    initialValue: { x: sleeve.position.x, y: sleeve.position.y},
+    onEnd: (position: Position, _event: PointerEvent) => {
+        sleeve.position.x = position.x;
+        sleeve.position.y = position.y;
     }, 
 })
+const isHovered = useElementHover(el);
 
-const changePos = (newx: number, newy: number) => {
+sleeve.changePos = (newx: number, newy: number) => {
     x.value = newx
     y.value = newy
 }
 
-const isHovered = useElementHover(el);
-
-items.push({
-    sleevekey: key,
-    label: props.label,
-    url: props.url,
-    position: {
-        x: x.value,
-        y: y.value
-    },
-    changePos
-});
 
 </script>
 <template>
     <div class="sleeve-container" ref="el" :style="style" style="position: fixed;">
         <div class="content-container">
-            <Label :text-raw="props.label" />
-            <a @click.prevent="" onmousedown="return false" :style="!isHovered ? 'display: none' : '' " :href="props.url">{{ props.url }}</a>
+            <Label :text-raw="sleeve.label" />
+            <a :style="!isHovered ? 'display: none' : '' " :href="sleeve.url.toString()">{{ sleeve.url.toString() }}</a>
         </div>
-        <ContextButton :position="position" :sleeve_key="key"/>
+        <ContextButton :item="item"/>
     </div>
 </template>
 
@@ -81,8 +60,8 @@ items.push({
 
     .content-container {
         width: 80%;
-height: 100%;
-}
+        height: 100%;
+    }
 
 
     a {
