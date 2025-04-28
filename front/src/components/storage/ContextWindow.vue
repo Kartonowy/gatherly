@@ -27,7 +27,7 @@ const tiles: TileBindable[] = [
         window.open(sleeve?.url.toString(), '_blank')
     }],
     ["edit", () => {
-        let info = getUserSleeveInfo()
+        let info = getUserSleeveInfo() // TODO: safety switch when user cancels input
         sleeve?.changeItem(info.label, info.url)
     }],
     ["tag", () => {}],
