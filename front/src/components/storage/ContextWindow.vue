@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { SleeveT, type Position } from '../../utils/types';
+import { SleeveT, type Position } from '../../utils/types.ts';
 import { useGlobalState } from '../../scripts/state.ts';
 import { getUserSleeveInfo } from '../../scripts/getUserItem.ts';
 

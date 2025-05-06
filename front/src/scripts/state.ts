@@ -5,8 +5,12 @@ import type { SleeveT } from '../utils/types'
 
 export const useGlobalState = createGlobalState(
     () => {
-        let state: { items: SleeveT[] } = reactive({
-            items: []
+        let state: { 
+            items: SleeveT[],
+            editContextWindow: boolean
+        } = reactive({
+            items: [],
+            editContextWindow: true
         })
 
 
