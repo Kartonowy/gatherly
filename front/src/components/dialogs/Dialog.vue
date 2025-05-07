@@ -2,10 +2,10 @@
 
 import {useGlobalState} from "../../scripts/state.ts";
 import EditContextDialog from "./EditContextDialog.vue";
-import {DialogKind} from "../../utils/types.ts";
 import AddContextDialog from "./AddContextDialog.vue";
 import PlaceholderContextDialog from "./PlaceholderContextDialog.vue";
 import SettingsDialog from "./SettingsDialog.vue";
+import { DialogKind } from "../../types/enums.ts";
 
 const { state, showDialog } = useGlobalState()
 

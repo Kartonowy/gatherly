@@ -2,9 +2,10 @@
 
 import { ref } from 'vue';
 import ContextWindow from './ContextWindow.vue';
-import type { Position, SleeveT } from '../../utils/types';
+import type { SleeveT } from '../../types/sleeve.ts';
 
-const props = defineProps<{
+
+defineProps<{
     item: SleeveT
 }>();
 

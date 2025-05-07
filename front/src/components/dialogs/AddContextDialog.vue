@@ -2,7 +2,7 @@
 
 import {useGlobalState} from "../../scripts/state.ts";
 import {ref} from "vue";
-import {SleeveT} from "../../utils/types.ts";
+import { SleeveT } from "../../types/sleeve.ts";
 
 const { addItem } = useGlobalState()
 
@@ -22,7 +22,7 @@ const url = ref("")
       url:
       <input type="url" name="url" id="url" v-model="url">
     </label>
-    <input @click.prevent="addItem(new SleeveT(label, url, Math.round(Math.random() * 1000)))" type="button" value="Update" id="submit">
+    <input @click.prevent="addItem(new SleeveT(label, url))" type="button" value="Update" id="submit">
   </form>
 </template>
 

@@ -1,4 +1,5 @@
-import { SleeveT } from "./types";
+import { SleeveT } from "../types/sleeve";
+
 
 export const sleeves = [      
     new SleeveT("Twoja znajoma", "https://roksa.pl/"),

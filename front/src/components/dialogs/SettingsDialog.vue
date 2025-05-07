@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { Themes } from '../../utils/types';
+import { Themes } from '../../types/enums';
 
 
 const theme = ref(Themes.Debug)
