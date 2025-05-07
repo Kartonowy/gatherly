@@ -26,6 +26,10 @@ const tiles: TileBindable[] = [
         for (let s of sleeves) {
             addItem(s)
         } // for development purposes TODO: Delete
+    }],
+    ["settings", () => {
+      setDialog(DialogKind.Settings, null);
+      showDialog(true);
     }]
 ];
 
