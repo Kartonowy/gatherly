@@ -24,21 +24,4 @@ const { state, showDialog } = useGlobalState()
 </template>
 
 <style scoped>
-  .dialog-container {
-    width:20%;
-    height:100%;
-    position: absolute;
-    left: 80%;
-    outline: 1px blue solid;
-  }
-
-  .dialog-header {
-    width: 100%;
-    height: 10%;
-  }
-
-  .dialog-content {
-    width: 100%;
-    height: 80%;
-  }
 </style>

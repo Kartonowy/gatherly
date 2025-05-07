@@ -19,7 +19,4 @@ const { state } = useGlobalState()
 </template>
 
 <style scoped>
-main {
-    width: 95%;
-}
 </style>
