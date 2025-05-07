@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { SleeveT, type Position } from '../../utils/types.ts';
-import { useGlobalState } from '../../scripts/state.ts';
-import { getUserSleeveInfo } from '../../scripts/getUserItem.ts';
+import {DialogKind, SleeveT} from '../../utils/types.ts';
+import {useGlobalState} from '../../scripts/state.ts';
 
 
 const props = defineProps<{
@@ -20,15 +19,15 @@ type TileBindable = [
     bind: () => void
 ];
 
-const { removeItem } = useGlobalState()
+const { removeItem, showDialog, setDialog } = useGlobalState()
 
 const tiles: TileBindable[] = [
     ["open", () => {
         window.open(sleeve?.url.toString(), '_blank')
     }],
     ["edit", () => {
-        let info = getUserSleeveInfo() // TODO: safety switch when user cancels input
-        sleeve?.changeItem(info.label, info.url)
+        setDialog(DialogKind.SleeveEdit, sleeve)
+        showDialog(true)
     }],
     ["tag", () => {}],
     ["categories", () => {}],

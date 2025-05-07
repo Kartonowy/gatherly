@@ -45,3 +45,10 @@ export type Position = {
     x: number,
     y: number
 }
+
+export enum DialogKind {
+    SleeveEdit,
+    SleeveAdd,
+    Placeholder, //TODO: Replace
+    None
+}

@@ -34,7 +34,7 @@ sleeve.changePos = (newx: number, newy: number) => {
     <div class="sleeve-container" ref="el" :style="style" style="position: fixed;">
         <div class="content-container">
             <Label :text-raw="sleeve.label" />
-            <a :style="!isHovered ? 'display: none' : '' " :href="sleeve.url.toString()">{{ sleeve.url.toString() }}</a>
+            <a @click.prevent :style="!isHovered ? 'display: none' : '' " :href="sleeve.url.toString()">{{ sleeve.url.toString() }}</a>
         </div>
         <ContextButton :item="item"/>
     </div>
@@ -52,7 +52,6 @@ sleeve.changePos = (newx: number, newy: number) => {
         align-items: center;
         -webkit-touch-callout: none;
         -webkit-user-select: none;
-        -khtml-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
