@@ -1,12 +1,24 @@
 import { createGlobalState } from '@vueuse/core'
 
 import { reactive } from 'vue'
-import type { SleeveT } from '../utils/types'
+import {DialogKind, type SleeveT} from '../utils/types'
 
 export const useGlobalState = createGlobalState(
     () => {
-        let state: { items: SleeveT[] } = reactive({
-            items: []
+        let state: { 
+            items: SleeveT[],
+            dialog: {
+                active: boolean,
+                kind: DialogKind,
+                context: SleeveT | null
+            }
+        } = reactive({
+            items: [],
+            dialog: {
+                active: false,
+                kind: DialogKind.None,
+                context: null
+            }
         })
 
 
@@ -24,8 +36,21 @@ export const useGlobalState = createGlobalState(
             })
         }
 
+        let showDialog = (_show: boolean) => {
+            state.dialog.active = _show;
+        }
 
-        return { state, getItem, addItem, removeItem }
+        let setDialog = (_dialog: DialogKind, _context: SleeveT | null) => {
+            state.dialog.kind = _dialog;
+            state.dialog.context = _context;
+        }
+
+        let getDialogContext = () => {
+            return state.dialog.context
+        }
+
+
+        return { state, getItem, addItem, removeItem, showDialog, setDialog, getDialogContext }
     }
 )
 

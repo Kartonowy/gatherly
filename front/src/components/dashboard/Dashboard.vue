@@ -1,29 +1,27 @@
 <script setup lang="ts">
 import sort from '../../scripts/sort';
-import { sleeves } from '../../utils/dummy';
-import { getUserSleeveInfo } from '../../scripts/getUserItem';
-import { SleeveT } from '../../utils/types';
-import { useGlobalState } from '../../scripts/state';
+import {sleeves} from '../../utils/dummy';
+import {DialogKind} from '../../utils/types';
+import {useGlobalState} from '../../scripts/state';
 
-const { addItem } = useGlobalState()
+const { addItem, showDialog, setDialog } = useGlobalState()
 type TileBindable = [
     name: string | number,
     bind: () => void
 ];
 
 const tiles: TileBindable[] = [
-    ["add", () => { 
-        let info = getUserSleeveInfo();
-        addItem(new SleeveT(
-            info.label,
-            info.url,
-            Math.round(Math.random() * 1000) // TODO: Replace with hashing based on label and url
-        ))
+    ["add", () => {
+      setDialog(DialogKind.SleeveAdd, null);
+      showDialog(true);
     }],
     ["sort", sort],
     ["filter", () => {}],
     ["categories", () => {}],
-    ["profile", () => {}],
+    ["dialog", () => {
+      setDialog(DialogKind.SleeveEdit, null);
+      showDialog(true);
+    }],
     ["???", () => {
         for (let s of sleeves) {
             addItem(s)
