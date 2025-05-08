@@ -21,12 +21,15 @@
 }
 #app main {
   width: 95%;
+  background-image: url("../dot.svg");
+  background-repeat: repeat;
 }
 #app main .sleeve-storage .sleeve-container {
   display: flex;
   flex-flow: row wrap;
   border: #10a46e 3px solid;
   color: #d6df7e;
+  background-color: #feeff6;
   width: 250px;
   height: 60px;
   border-radius: 25px;
@@ -38,6 +41,8 @@
   -ms-user-select: none;
   user-select: none;
   cursor: grab;
+  opacity: 0.85;
+  transition: 0.1s;
 }
 #app main .sleeve-storage .sleeve-container .content-container {
   width: 80%;
@@ -68,6 +73,44 @@
 }
 #app main .sleeve-storage .sleeve-container button {
   cursor: pointer;
+  background-color: #d6df7e;
+  color: #5a5dbc;
+  border: none;
+  border-radius: 25px;
+  font-size: 180%;
+}
+#app main .sleeve-storage .active.container {
+  margin-left: 1vw;
+  margin-top: 1vh;
+}
+#app main .sleeve-storage .active.container .context-menu {
+  color: #5a5dbc;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #feeff6;
+  border-radius: 7px 25px 15px 25px;
+  padding: 1vw 1vh;
+}
+#app main .sleeve-storage .active.container .context-menu .tile {
+  transition: 0.1s;
+  width: 6vw;
+  height: 2vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2px;
+}
+#app main .sleeve-storage .active.container .context-menu .tile:hover {
+  transform: scale(115%, 115%);
+  background-color: #f8b7d5;
+  font-weight: 600;
+  border-radius: 10px 25px 15px 25px;
+  cursor: pointer;
+}
+#app main .sleeve-storage .sleeve-container:hover {
+  opacity: 1;
 }
 #app .container-dashboard {
   width: 5%;
