@@ -7,7 +7,7 @@ import type {Position} from "../../types/types.ts";
 
 const props = defineProps<{
     item: SleeveT,
-    buttonContext: {
+    context: {
       active: boolean,
       position: Position
     },
@@ -42,9 +42,9 @@ const tiles: TileBindable[] = [
 </script>
 
 <template>
-    <div :class="{ active: buttonContext.active }" class="container" :style="{
-      left: buttonContext.position.x - item.position.x + 'px',
-      top: buttonContext.position.y - item.position.y + 'px'
+    <div :class="{ active: context.active }" class="container" :style="{
+      left: context.position.x - item.position.x + 'px',
+      top: context.position.y - item.position.y + 'px'
     }">
         <div class="context-menu">
             <div class="tile" v-for="tile in tiles">

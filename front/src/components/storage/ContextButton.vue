@@ -1,35 +1,14 @@
 <script setup lang="ts">
 
-import { ref } from 'vue';
-import ContextWindow from './ContextWindow.vue';
-import type {SleeveT} from "../../types/sleeve.ts";
 
-defineProps<{
-  item: SleeveT
+const props = defineProps<{
+  toggle: (e: MouseEvent) => void;
 }>();
-
-const buttonContext = ref({
-      active: false,
-      position: {
-        x: 0,
-        y: 0,
-      }
-    }
-);
-
-function onCtxClick(e: MouseEvent) {
-  buttonContext.value.active = !buttonContext.value.active;
-  buttonContext.value.position = {
-    x: e.clientX,
-    y: e.clientY,
-  }
-}
 
 </script>
 
 <template>
-    <button @click="(e) => onCtxClick(e)">+</button>
-    <ContextWindow :button-context="buttonContext" :item="item"/>
+    <button @click="(e) => props.toggle(e)">+</button>
 </template>
 
 <style scoped>
