@@ -1,11 +1,16 @@
 <script setup lang="ts">
 import {ref} from 'vue';
-import { Themes } from '../../types/enums';
+import {Languages, Themes} from '../../types/enums';
 import {enumFields} from "../../utils/utils.ts";
 
 
 const theme = ref(Themes.None)
+const locale = ref(Languages.English)
 
+// Since Themes and Languages are pretty static, we could just write
+// html and not load it dynamically
+// to discuss
+// might want to add option of allowing users to create their own color palette or theme
 
 </script>
 
@@ -19,6 +24,15 @@ const theme = ref(Themes.None)
         </label>
         <button>Apply</button> <!-- TODO: Decide whether reload automatically or after press -->
     </div>
+  <div class="locale-select">
+    <label for="locale-select">
+      <select v-model="locale" name="locale-select">
+        <option selected :value="Languages.English">English</option>
+        <option :value="Languages.Polish">Polish</option>
+      </select>
+    </label>
+    <button>Apply</button> <!-- TODO: Decide whether reload automatically or after press -->
+  </div>
 </template>
 
 <style scoped>
