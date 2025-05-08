@@ -2,18 +2,18 @@
 import {useGlobalState} from '../../scripts/state.ts';
 import { DialogKind } from '../../types/enums.ts';
 import type { SleeveT } from '../../types/sleeve.ts';
+import type {Position} from "../../types/types.ts";
 
 
 const props = defineProps<{
     item: SleeveT,
-    isContextActive: boolean,
+    buttonContext: {
+      active: boolean,
+      position: Position
+    },
 }>();
 const sleeve = props.item
 
-const positionD = {
-    left: 'calc(250px - 1.4rem)',
-    top: 'calc(60px - 1.65rem)' 
-}
 
 type TileBindable = [
     name: string | number,
@@ -42,7 +42,10 @@ const tiles: TileBindable[] = [
 </script>
 
 <template>
-    <div :class="{ active: isContextActive }" class="container" :style="positionD" >
+    <div :class="{ active: props.buttonContext.active }" class="container" :style="{
+      left: props.buttonContext.position.x - props.item.position.x + 'px',
+      top: props.buttonContext.position.y - props.item.position.y + 'px'
+    }">
         <div class="context-menu">
             <div class="tile" v-for="tile in tiles">
                 <div @click="tile[1]">{{ tile[0] }}</div>

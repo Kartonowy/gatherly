@@ -2,19 +2,35 @@
 
 import { ref } from 'vue';
 import ContextWindow from './ContextWindow.vue';
-import type { SleeveT } from '../../utils/types';
+import type {SleeveT} from "../../types/sleeve.ts";
 
 defineProps<{
   item: SleeveT
 }>();
 
-const isContextActive = ref(false);
+const buttonContext = ref({
+      active: false,
+      position: {
+        x: 0,
+        y: 0,
+      }
+    }
+);
+
+function onCtxClick(e: MouseEvent) {
+  buttonContext.value.active = !buttonContext.value.active;
+  buttonContext.value.position = {
+    x: e.clientX,
+    y: e.clientY,
+  }
+  console.log(buttonContext.value.position);
+}
 
 </script>
 
 <template>
-    <button @click="() => {isContextActive = !isContextActive}">+</button>
-    <ContextWindow :is-context-active="isContextActive" :item="item"/>
+    <button @click="(e) => onCtxClick(e)">+</button>
+    <ContextWindow :button-context="buttonContext" :item="item"/>
 </template>
 
 <style scoped>
