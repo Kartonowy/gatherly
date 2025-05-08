@@ -2,10 +2,10 @@
 
 import { ref } from 'vue';
 import ContextWindow from './ContextWindow.vue';
-import type { Position, SleeveT } from '../../utils/types';
+import type { SleeveT } from '../../utils/types';
 
-const props = defineProps<{
-    item: SleeveT
+defineProps<{
+  item: SleeveT
 }>();
 
 const isContextActive = ref(false);

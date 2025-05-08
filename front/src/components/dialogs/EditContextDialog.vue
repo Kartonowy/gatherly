@@ -20,7 +20,7 @@ const url = ref(getDialogContext()?.url!)
         url:
         <input type="url" name="url" id="url" v-model="url">
       </label>
-      <input @click.prevent="getDialogContext()?.changeItem(label, url)" type="button" value="Add" id="submit">
+      <input @click.prevent="getDialogContext()?.changeItem(label, url)" type="button" value="Update" id="submit">
     </form>
 </template>
 
