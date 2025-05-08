@@ -13,7 +13,7 @@ const { state, showDialog } = useGlobalState()
 <template>
   <div class="dialog-container">
     <div class="dialog-header">
-      <button @click="showDialog(false)">close</button>
+      <button @click="showDialog(false)">x</button>
     </div>
     <div class="dialog-content">
       <EditContextDialog v-if="state.dialog.kind == DialogKind.SleeveEdit" />

@@ -128,7 +128,7 @@
     .container-dashboard {
       width: 5%;
       height: 100vh;
-      outline: 1px #d582ae solid;
+      outline: 3px #d582ae solid;
       display: flex;
       flex-flow: column nowrap;
       justify-content: center;
@@ -154,7 +154,8 @@
       height:100%;
       position: absolute;
       left: 80%;
-      outline: 1px #d582ae solid;
+      outline: 4px #d582ae solid;
+      background-color: #f8b7d5;
 
       button, input[type="button"]{
         cursor: pointer;
@@ -163,11 +164,60 @@
       .dialog-header {
         width: 100%;
         height: 10%;
+
+        button{
+          width:25%;
+          height: 25%;
+          background-color:#faa49a;
+          border-top:none;
+          border-left: none;
+          border-right:3px #d582ae solid;
+          border-bottom:3px #d582ae solid;
+          border-radius: 0px 0px 15px 0px;
+          color:#c4391d;
+          font-weight: 700;
+        }
       }
     
       .dialog-content {
         width: 100%;
         height: 80%;
+        color:#5a5dbc;
+
+        input[type="text"], input[type="url"]{
+          border:0.23em #10a46e solid;
+          width:18vw;
+          height:3vh;
+          border-radius:10px 25px 15px 25px;
+          background-color: #feeff6;
+          color: #5a5dbc;
+        }
+
+        form{
+          padding: 1vw;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          line-height: 2.5vh;
+
+          label{
+            text-transform: capitalize;
+            font-weight: 600;
+          }
+
+          #submit{
+            width:9vw;
+            height: 3vh;
+            background-color: #d6df7e;
+            color: #10a46e;
+            text-transform: uppercase;
+            font-weight: 700;
+            border-radius: 25px;
+            border: none;
+            margin:1em;
+          }
+        }
       }
     }
 }
