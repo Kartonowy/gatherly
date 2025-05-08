@@ -9,5 +9,11 @@ export enum DialogKind {
 export enum Themes {
     Debug,
     Pinkish,
-    Placeholder
+    Placeholder,
+    None
+}
+
+export enum Languages {
+    English,
+    Polish
 }
