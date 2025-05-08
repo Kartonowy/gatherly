@@ -4,7 +4,7 @@ import ContextButton from './ContextButton.vue';
 
 import { useDraggable, useElementHover, type Position } from '@vueuse/core';
 import { useTemplateRef } from 'vue';
-import type { SleeveT } from '../../utils/types';
+import type { SleeveT } from '../../types/sleeve';
 
 
 const props = defineProps<{

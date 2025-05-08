@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import {DialogKind, SleeveT} from '../../utils/types.ts';
 import {useGlobalState} from '../../scripts/state.ts';
+import { DialogKind } from '../../types/enums.ts';
+import type { SleeveT } from '../../types/sleeve.ts';
 
 
 const props = defineProps<{

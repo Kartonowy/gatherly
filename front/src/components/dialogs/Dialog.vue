@@ -2,9 +2,10 @@
 
 import {useGlobalState} from "../../scripts/state.ts";
 import EditContextDialog from "./EditContextDialog.vue";
-import {DialogKind} from "../../utils/types.ts";
 import AddContextDialog from "./AddContextDialog.vue";
 import PlaceholderContextDialog from "./PlaceholderContextDialog.vue";
+import SettingsDialog from "./SettingsDialog.vue";
+import { DialogKind } from "../../types/enums.ts";
 
 const { state, showDialog } = useGlobalState()
 
@@ -17,8 +18,9 @@ const { state, showDialog } = useGlobalState()
     </div>
     <div class="dialog-content">
       <EditContextDialog v-if="state.dialog.kind == DialogKind.SleeveEdit" />
-      <AddContextDialog v-if="state.dialog.kind == DialogKind.SleeveAdd" />
-      <PlaceholderContextDialog v-if="state.dialog.kind == DialogKind.Placeholder" />
+      <AddContextDialog v-else-if="state.dialog.kind == DialogKind.SleeveAdd" />
+      <PlaceholderContextDialog v-else-if="state.dialog.kind == DialogKind.Placeholder" />
+      <SettingsDialog v-else-if="state.dialog.kind == DialogKind.Settings" />
     </div>
   </div>
 </template>
