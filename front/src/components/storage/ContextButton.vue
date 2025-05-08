@@ -23,7 +23,6 @@ function onCtxClick(e: MouseEvent) {
     x: e.clientX,
     y: e.clientY,
   }
-  console.log(buttonContext.value.position);
 }
 
 </script>

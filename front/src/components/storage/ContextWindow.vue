@@ -5,7 +5,7 @@ import type { SleeveT } from '../../types/sleeve.ts';
 import type {Position} from "../../types/types.ts";
 
 
-defineProps<{
+const props = defineProps<{
     item: SleeveT,
     buttonContext: {
       active: boolean,
