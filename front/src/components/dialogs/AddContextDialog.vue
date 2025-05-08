@@ -2,7 +2,7 @@
 
 import {useGlobalState} from "../../scripts/state.ts";
 import {ref} from "vue";
-import {SleeveT} from "../../utils/types.ts";
+import {SleeveT} from "../../types/sleeve.ts";
 
 const { addItem, getDialogContext, showDialog } = useGlobalState()
 

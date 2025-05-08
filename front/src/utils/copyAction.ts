@@ -1,6 +1,7 @@
 import {useGlobalState} from "../scripts/state.ts";
-import {DialogKind, SleeveT} from "./types.ts";
 import {useEventListener} from "@vueuse/core";
+import {DialogKind} from "../types/enums.ts";
+import {SleeveT} from "../types/sleeve.ts";
 
 const { showDialog, setDialog } = useGlobalState()
 export const cpy = () => {
