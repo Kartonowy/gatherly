@@ -16,7 +16,7 @@ const positionD = {
 
 type TileBindable = [
     name: string | number,
-    bind: () => void
+    bind?: () => void
 ];
 
 const { removeItem, showDialog, setDialog } = useGlobalState()
@@ -29,9 +29,9 @@ const tiles: TileBindable[] = [
         setDialog(DialogKind.SleeveEdit, sleeve)
         showDialog(true)
     }],
-    ["tag", () => {}],
-    ["categories", () => {}],
-    ["highlight", () => {}],
+    ["tag"],
+    ["categories"],
+    ["highlight"],
     ["delete", () => {
         // todo: add exists test
         removeItem(sleeve.sleevekey!)
