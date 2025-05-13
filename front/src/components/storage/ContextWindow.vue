@@ -62,12 +62,4 @@ const tiles: TileBindable[] = [
     :not(.active).container {
         display: none;
     }
-
-    .context-menu {
-        outline: 2px red solid;
-    }
-
-    .tile:hover {
-        background: red;
-    }
 </style>

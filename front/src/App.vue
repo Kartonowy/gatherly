@@ -21,7 +21,4 @@ cpy()
 </template>
 
 <style scoped>
-main {
-    width: 95%;
-}
 </style>

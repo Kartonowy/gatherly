@@ -45,21 +45,4 @@ const tiles: TileBindable[] = [
 </template>
 
 <style scoped>
-.container-dashboard {
-    width: 5%;
-    height: 100vh;
-    outline: 1px red solid;
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    align-items: center;
-}
-.tile {
-    outline: 1px blue solid;
-    width: 5vw;
-    height: 5vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 </style>

@@ -77,37 +77,5 @@ sleeve.changePos = (newx: number, newy: number) => {
 </template>
 
 <style scoped>
-    .sleeve-container {
-        display: flex;
-        flex-flow: row wrap;
-        border:slategrey 1px solid;
-        width: 250px;
-        height: 60px;
-        border-radius: 25px;
-        padding: 0.5vmin;
-        align-items: center;
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-    }
-
-    .content-container {
-        width: 80%;
-        height: 100%;
-    }
-
-
-    a {
-        all: unset;
-        color: midnightblue;
-        font-size: 1.5vmin;
-        max-width: 50px;
-        width: 50px;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-    }
 
 </style>
