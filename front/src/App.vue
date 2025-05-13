@@ -3,15 +3,17 @@
 import Dashboard from './components/dashboard/Dashboard.vue';
 import Dialog from "./components/dialogs/Dialog.vue";
 import {useGlobalState} from "./scripts/state.ts";
+import { cpy } from "./utils/copyAction.ts";
 
 const { state } = useGlobalState()
 
+cpy()
 
 </script>
 
 <template>
     <!-- <Navbar/> -->
-    <main>
+    <main class="main">
         <RouterView/>
     </main>
     <Dashboard />
