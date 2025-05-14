@@ -135,7 +135,7 @@
       align-items: center;
     
       .tile {
-        outline: 1px #d582ae solid;
+        outline: 2px #d582ae solid;
         background-color: #feeff6;
         width: 5vw;
         height: 5vw;
@@ -155,7 +155,8 @@
       position: absolute;
       left: 80%;
       outline: 4px #d582ae solid;
-      background-color: #f8b7d5;
+      background-color: #feeff6;
+      overflow: hidden;
 
       button, input[type="button"]{
         cursor: pointer;
@@ -171,11 +172,12 @@
           background-color:#faa49a;
           border-top:none;
           border-left: none;
-          border-right:3px #d582ae solid;
-          border-bottom:3px #d582ae solid;
+          border-right:1px #e9897e solid;
+          border-bottom:1px #e9897e solid;
           border-radius: 0px 0px 15px 0px;
           color:#c4391d;
           font-weight: 700;
+          box-shadow: 1px 1px #e9897e;
         }
       }
     
@@ -189,7 +191,7 @@
           width:18vw;
           height:3vh;
           border-radius:10px 25px 15px 25px;
-          background-color: #feeff6;
+          background-color: #e0eaff;
           color: #5a5dbc;
         }
 
@@ -216,6 +218,9 @@
             border-radius: 25px;
             border: none;
             margin:1em;
+            border-right: #10a46e 1px solid;
+            border-bottom: #10a46e 1px solid;
+            box-shadow: 1px 1px;
           }
         }
       }
