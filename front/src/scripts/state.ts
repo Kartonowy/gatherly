@@ -1,7 +1,8 @@
 import { createGlobalState } from '@vueuse/core'
 
 import { reactive } from 'vue'
-import {DialogKind, type SleeveT} from '../utils/types'
+import type { SleeveT } from '../types/sleeve'
+import { DialogKind } from '../types/enums'
 
 export const useGlobalState = createGlobalState(
     () => {

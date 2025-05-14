@@ -1,20 +1,14 @@
 <script setup lang="ts">
 
-import { ref } from 'vue';
-import ContextWindow from './ContextWindow.vue';
-import type { Position, SleeveT } from '../../utils/types';
 
 const props = defineProps<{
-    item: SleeveT
+  toggle: (e: MouseEvent) => void;
 }>();
-
-const isContextActive = ref(false);
 
 </script>
 
 <template>
-    <button @click="() => {isContextActive = !isContextActive}">+</button>
-    <ContextWindow :is-context-active="isContextActive" :item="item"/>
+    <button @click="(e) => props.toggle(e)">+</button>
 </template>
 
 <style scoped>

@@ -1,22 +1,23 @@
 <script setup lang="ts">
-import {DialogKind, SleeveT} from '../../utils/types.ts';
 import {useGlobalState} from '../../scripts/state.ts';
+import { DialogKind } from '../../types/enums.ts';
+import type { SleeveT } from '../../types/sleeve.ts';
+import type {Position} from "../../types/types.ts";
 
 
 const props = defineProps<{
     item: SleeveT,
-    isContextActive: boolean,
+    context: {
+      active: boolean,
+      position: Position
+    },
 }>();
 const sleeve = props.item
 
-const positionD = {
-    left: 'calc(250px - 1.4rem)',
-    top: 'calc(60px - 1.65rem)' 
-}
 
 type TileBindable = [
     name: string | number,
-    bind: () => void
+    bind?: () => void
 ];
 
 const { removeItem, showDialog, setDialog } = useGlobalState()
@@ -29,9 +30,9 @@ const tiles: TileBindable[] = [
         setDialog(DialogKind.SleeveEdit, sleeve)
         showDialog(true)
     }],
-    ["tag", () => {}],
-    ["categories", () => {}],
-    ["highlight", () => {}],
+    ["tag"],
+    ["categories"],
+    ["highlight"],
     ["delete", () => {
         // todo: add exists test
         removeItem(sleeve.sleevekey!)
@@ -41,7 +42,10 @@ const tiles: TileBindable[] = [
 </script>
 
 <template>
-    <div :class="{ active: isContextActive }" class="container" :style="positionD" >
+    <div :class="{ active: context.active }" class="container" :style="{
+      left: context.position.x - item.position.x + 'px',
+      top: context.position.y - item.position.y + 'px'
+    }">
         <div class="context-menu">
             <div class="tile" v-for="tile in tiles">
                 <div @click="tile[1]">{{ tile[0] }}</div>

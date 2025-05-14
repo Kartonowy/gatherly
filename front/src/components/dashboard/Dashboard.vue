@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import sort from '../../scripts/sort';
 import {sleeves} from '../../utils/dummy';
-import {DialogKind} from '../../utils/types';
 import {useGlobalState} from '../../scripts/state';
+import { DialogKind } from '../../types/enums';
 
 const { addItem, showDialog, setDialog } = useGlobalState()
 type TileBindable = [
@@ -26,6 +26,10 @@ const tiles: TileBindable[] = [
         for (let s of sleeves) {
             addItem(s)
         } // for development purposes TODO: Delete
+    }],
+    ["settings", () => {
+      setDialog(DialogKind.Settings, null);
+      showDialog(true);
     }]
 ];
 
