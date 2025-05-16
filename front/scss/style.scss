@@ -50,6 +50,7 @@
           .content-container {
             width: 80%;
             height: 100%;
+            text-overflow: ellipsis;
 
             p{
               background-color: #10a46e;
@@ -63,13 +64,13 @@
             a {
               all: unset;
               color: #d582ae;
+              width: 90%;
               font-size: 1.5vmin;
-              max-width: 50px;
-              width: 50px;
               overflow: hidden;
               white-space: nowrap;
               text-overflow: ellipsis;
               padding-left: 0.5vmin;
+              display: inline-block;
             }
 
             a:hover{
@@ -88,8 +89,6 @@
           }
         }
         .active.container{
-          margin-left: 1vw;
-          margin-top: 1vh;
           .context-menu{
             color:#5a5dbc;
             display: flex;
@@ -143,7 +142,7 @@
         align-items: center;
         justify-content: center;
         text-transform: uppercase;
-        font-family: 'Sniglet';
+        font-family: 'Sniglet', sans-serif;
         font-weight: 600;
         color: #5a5dbc;
       }
@@ -173,7 +172,7 @@
           border-left: none;
           border-right:3px #d582ae solid;
           border-bottom:3px #d582ae solid;
-          border-radius: 0px 0px 15px 0px;
+          border-radius: 0 0 15px 0;
           color:#c4391d;
           font-weight: 700;
         }
