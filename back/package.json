@@ -4,7 +4,8 @@
   "main": "src/index.ts",
   "scripts": {
     "start": "npx tsx src/index.ts",
-    "apply": "npx drizzle-kit push"
+    "apply": "npx drizzle-kit push",
+    "populate": "npx tsx ./src/db/mockdata.ts"
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +20,7 @@
   },
   "dependencies": {
     "@elysiajs/node": "^1.2.5",
+    "argon2": "^0.43.0",
     "dotenv": "^16.4.7",
     "drizzle-orm": "^0.39.3",
     "elysia": "^1.2.12",

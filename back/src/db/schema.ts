@@ -1,24 +1,46 @@
 import { sql } from "drizzle-orm";
-import { AnyPgColumn, integer, pgTable, text } from "drizzle-orm/pg-core";
+import {AnyPgColumn, integer, pgTable, serial, text} from "drizzle-orm/pg-core";
+import {relations} from "drizzle-orm/relations";
 
 export const usersTable = pgTable("users", {
-    id: integer("id").unique().notNull().primaryKey(),
+    id: serial("id").unique().primaryKey(),
     name: text("name").notNull(),
     email: text("email").notNull().unique(),
-    // tags
+    password: text("password").notNull(),
+    // TODO settings
 });
 
-export const binderTable = pgTable("binders", {
-    id: integer("id").unique().notNull().primaryKey(),  
-    summary: text("summary"),
-    category: integer().references((): AnyPgColumn => categoryTable.id),
-    tags: text("tags").array().default(sql`'{}'::text[]`),
-    creator: integer().notNull().references((): AnyPgColumn => usersTable.id),
-    collaborators: integer().array().default(sql`'{}'::integer[]`)
-    //notes
-})
 
-export const categoryTable = pgTable("categories", {
-    id: integer("id").unique().notNull().primaryKey(),
+export const usersRelation = relations(usersTable, ({many}) => ({
+    boardsTable: many(boardsTable),
+}));
+
+export const boardsTable = pgTable("boards", {
+    id: serial("id").unique().primaryKey(),
+    owner: integer("ownerId"),
     name: text("name").notNull(),
 })
+
+export const boardsRelation = relations(boardsTable, ({many, one}) => ({
+    sleeveTable: many(sleeveTable),
+    owner: one(usersTable, {
+        fields: [boardsTable.owner],
+        references: [usersTable.id],
+    }),
+}));
+
+export const sleeveTable = pgTable("sleeves", {
+    id: serial("id").unique().primaryKey(),
+    name: text("name").notNull(),
+    url: text("url").notNull(),
+    summary: text("summary"),
+    tags: text("tags").array().default(sql`'{}'::text[]`),
+    board: integer()
+});
+
+export const sleeveRelation = relations(sleeveTable, ({one}) => ({
+    owner: one(boardsTable, {
+        fields: [sleeveTable.board],
+        references: [boardsTable.id],
+    }),
+}));
