@@ -32,6 +32,9 @@ const _createSleeve = createInsertSchema(sleeveTable, {
 export const APIrouter = new Elysia({ prefix: "/api" })
     .get('/', (req: any, res: any) => { console.log(req, res) })
     .post("/sign-up", ({ body }: { body: object}) => {
+        // second VALIDATION OF CREDENTIALS
+        // ADDING TO DATABASE
+        // LOGGING IN OD RAZU (JWT)
         console.log(body)
     }, {
         body: t.Omit(
@@ -40,9 +43,12 @@ export const APIrouter = new Elysia({ prefix: "/api" })
         )
     })
     .post("/log-in", ({ body }: { body: object}) => {
+        // CHECK CREDENTIALS
+        // ADD JWT
         console.log(body)
     })
     .post("/add-board", async ({ body }: any) => {
+        // CHECK IF SUCCEED?
         console.log(await db.insert(boardsTable).values([{...body}]))
     }, {
         body: t.Omit(
