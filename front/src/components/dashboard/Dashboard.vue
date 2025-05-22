@@ -17,7 +17,10 @@ const tiles: TileBindable[] = [
     }],
     ["sort", sort],
     ["filter", () => {}],
-    ["categories", () => {}],
+    ["User", () => {
+      setDialog(DialogKind.Auth, null);
+      showDialog(true);
+    }],
     ["dialog", () => {
       setDialog(DialogKind.SleeveEdit, null);
       showDialog(true);
