@@ -25,7 +25,7 @@ let logintab = ref(true);
       <FormKit type="text" name="username" id="username" label="Username" />
       <FormKit type="email" name="email" id="email" label="E-mail address" />
       <FormKit type="password" name="password" id="password" label="Password" />
-      <FormKit type="password" name="password" id="password" label="Repeat Password" />
+      <FormKit type="password" name="repeatpassword" id="repeatpassword" label="Repeat Password" />
     </FormKit>
   </div>
 </template>
