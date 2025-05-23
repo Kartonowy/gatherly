@@ -1,6 +1,6 @@
 import {Elysia, t} from "elysia";
 
-import {createInsertSchema, createSelectSchema} from "drizzle-typebox";
+import {createInsertSchema} from "drizzle-typebox";
 import {boardsTable, sleeveTable, usersTable} from "../db/schema.js";
 import {db} from "../db/index.js";
 import {eq} from "drizzle-orm";
