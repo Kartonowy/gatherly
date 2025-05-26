@@ -27,9 +27,9 @@
 #app main .sleeve-storage .sleeve-container {
   display: flex;
   flex-flow: row wrap;
-  border: #10a46e 3px solid;
-  color: #d6df7e;
-  background-color: #feeff6;
+  border: #426bc2 3px solid;
+  color: #0b1957;
+  background-color: #36337e;
   width: 250px;
   height: 60px;
   border-radius: 25px;
@@ -47,10 +47,9 @@
 #app main .sleeve-storage .sleeve-container .content-container {
   width: 80%;
   height: 100%;
-  text-overflow: ellipsis;
 }
 #app main .sleeve-storage .sleeve-container .content-container p {
-  background-color: #10a46e;
+  background-color: #426bc2;
   border-bottom-right-radius: 25px;
   border-top-left-radius: 25px;
   padding-left: 1vmin;
@@ -59,34 +58,38 @@
 }
 #app main .sleeve-storage .sleeve-container .content-container a {
   all: unset;
-  color: #d582ae;
-  width: 90%;
+  color: #222023;
   font-size: 1.5vmin;
+  max-width: 50px;
+  width: 50px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   padding-left: 0.5vmin;
-  display: inline-block;
 }
 #app main .sleeve-storage .sleeve-container .content-container a:hover {
-  color: #dd4b9b;
+  color: #f7f4ed;
   cursor: pointer;
 }
 #app main .sleeve-storage .sleeve-container button {
   cursor: pointer;
-  background-color: #d6df7e;
-  color: #5a5dbc;
+  background-color: #0b1957;
+  color: #ffb2f7;
   border: none;
   border-radius: 25px;
   font-size: 180%;
 }
+#app main .sleeve-storage .active.container {
+  margin-left: 1vw;
+  margin-top: 1vh;
+}
 #app main .sleeve-storage .active.container .context-menu {
-  color: #5a5dbc;
+  color: #ffb2f7;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #feeff6;
+  background-color: #36337e;
   border-radius: 7px 25px 15px 25px;
   padding: 1vw 1vh;
 }
@@ -101,7 +104,7 @@
 }
 #app main .sleeve-storage .active.container .context-menu .tile:hover {
   transform: scale(115%, 115%);
-  background-color: #f8b7d5;
+  background-color: #88a2ff;
   font-weight: 600;
   border-radius: 10px 25px 15px 25px;
   cursor: pointer;
@@ -112,32 +115,32 @@
 #app .container-dashboard {
   width: 5%;
   height: 100vh;
-  outline: 3px #d582ae solid;
+  outline: 3px #222023 solid;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
 }
 #app .container-dashboard .tile {
-  outline: 2px #d582ae solid;
-  background-color: #feeff6;
+  outline: 2px #222023 solid;
+  background-color: #36337e;
   width: 5vw;
   height: 5vw;
   display: flex;
   align-items: center;
   justify-content: center;
   text-transform: uppercase;
-  font-family: "Sniglet", sans-serif;
+  font-family: "Sniglet";
   font-weight: 600;
-  color: #5a5dbc;
+  color: #ffb2f7;
 }
 #app .dialog-container {
   width: 20%;
   height: 100%;
   position: absolute;
   left: 80%;
-  outline: 4px #d582ae solid;
-  background-color: #feeff6;
+  outline: 4px #222023 solid;
+  background-color: #36337e;
   overflow: hidden;
 }
 #app .dialog-container button, #app .dialog-container input[type=button] {
@@ -153,7 +156,6 @@
   background-color: #faa49a;
   border-top: none;
   border-left: none;
-
   border-right: 1px #e9897e solid;
   border-bottom: 1px #e9897e solid;
   border-radius: 0px 0px 15px 0px;
@@ -164,15 +166,15 @@
 #app .dialog-container .dialog-content {
   width: 100%;
   height: 80%;
-  color: #5a5dbc;
+  color: #ffb2f7;
 }
 #app .dialog-container .dialog-content input[type=text], #app .dialog-container .dialog-content input[type=url] {
-  border: 0.23em #10a46e solid;
+  border: 0.23em #426bc2 solid;
   width: 18vw;
   height: 3vh;
   border-radius: 10px 25px 15px 25px;
-  background-color: #e0eaff;
-  color: #5a5dbc;
+  background-color: #e8d9ed;
+  color: #ffb2f7;
 }
 #app .dialog-container .dialog-content form {
   padding: 1vw;
@@ -189,15 +191,15 @@
 #app .dialog-container .dialog-content form #submit {
   width: 9vw;
   height: 3vh;
-  background-color: #d6df7e;
-  color: #10a46e;
+  background-color: #0b1957;
+  color: #426bc2;
   text-transform: uppercase;
   font-weight: 700;
   border-radius: 25px;
   border: none;
   margin: 1em;
-  border-right: #10a46e 1px solid;
-  border-bottom: #10a46e 1px solid;
+  border-right: #426bc2 1px solid;
+  border-bottom: #426bc2 1px solid;
   box-shadow: 1px 1px;
 }
 #app .dialog-container .dialog-content .theme-select, #app .dialog-container .dialog-content .locale-select {
@@ -210,10 +212,10 @@
   width: 11vw;
   height: 3vh;
   margin-left: 0.5em;
-  background-color: #e0eaff;
+  background-color: #e8d9ed;
   border-radius: 10px 25px 15px 25px;
-  border: 0.2em #10a46e solid;
-  color: #5a5dbc;
+  border: 0.2em #426bc2 solid;
+  color: #ffb2f7;
   font-weight: 600;
   padding: 0.2em;
 }
@@ -222,13 +224,13 @@
   height: 2.5vh;
   border-radius: 17px;
   margin-left: 0.7em;
-  background-color: #f8b7d5;
-  border-right: #d582ae 1px solid;
-  border-bottom: #d582ae 1px solid;
+  background-color: #88a2ff;
+  border-right: #222023 1px solid;
+  border-bottom: #222023 1px solid;
   box-shadow: 1px 1px;
   border: none;
-  color: #dd4b9b;
+  color: #f7f4ed;
   font-weight: 600;
 }
 
-/*# sourceMappingURL=style.css.map */
+/*# sourceMappingURL=style-midnight.css.map */
