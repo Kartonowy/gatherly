@@ -47,6 +47,7 @@
 #app main .sleeve-storage .sleeve-container .content-container {
   width: 80%;
   height: 100%;
+  text-overflow: ellipsis;
 }
 #app main .sleeve-storage .sleeve-container .content-container p {
   background-color: #10a46e;
@@ -59,13 +60,13 @@
 #app main .sleeve-storage .sleeve-container .content-container a {
   all: unset;
   color: #d582ae;
+  width: 90%;
   font-size: 1.5vmin;
-  max-width: 50px;
-  width: 50px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   padding-left: 0.5vmin;
+  display: inline-block;
 }
 #app main .sleeve-storage .sleeve-container .content-container a:hover {
   color: #dd4b9b;
@@ -78,10 +79,6 @@
   border: none;
   border-radius: 25px;
   font-size: 180%;
-}
-#app main .sleeve-storage .active.container {
-  margin-left: 1vw;
-  margin-top: 1vh;
 }
 #app main .sleeve-storage .active.container .context-menu {
   color: #5a5dbc;
@@ -130,7 +127,7 @@
   align-items: center;
   justify-content: center;
   text-transform: uppercase;
-  font-family: "Sniglet";
+  font-family: "Sniglet", sans-serif;
   font-weight: 600;
   color: #5a5dbc;
 }
@@ -156,6 +153,7 @@
   background-color: #faa49a;
   border-top: none;
   border-left: none;
+
   border-right: 1px #e9897e solid;
   border-bottom: 1px #e9897e solid;
   border-radius: 0px 0px 15px 0px;

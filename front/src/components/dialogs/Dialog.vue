@@ -6,6 +6,7 @@ import AddContextDialog from "./AddContextDialog.vue";
 import PlaceholderContextDialog from "./PlaceholderContextDialog.vue";
 import SettingsDialog from "./SettingsDialog.vue";
 import { DialogKind } from "../../types/enums.ts";
+import AuthDialog from "./AuthDialog.vue";
 
 const { state, showDialog } = useGlobalState()
 
@@ -19,6 +20,7 @@ const { state, showDialog } = useGlobalState()
     <div class="dialog-content">
       <EditContextDialog v-if="state.dialog.kind == DialogKind.SleeveEdit" />
       <AddContextDialog v-else-if="state.dialog.kind == DialogKind.SleeveAdd" />
+      <AuthDialog v-else-if="state.dialog.kind == DialogKind.Auth" />
       <PlaceholderContextDialog v-else-if="state.dialog.kind == DialogKind.Placeholder" />
       <SettingsDialog v-else-if="state.dialog.kind == DialogKind.Settings" />
     </div>
