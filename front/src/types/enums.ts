@@ -2,6 +2,7 @@ export enum DialogKind {
     SleeveEdit,
     SleeveAdd,
     Settings,
+    Auth,
     Placeholder, //TODO: Replace
     None
 }
