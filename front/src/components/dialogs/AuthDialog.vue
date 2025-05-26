@@ -5,6 +5,15 @@ import {ref} from "vue";
 
 let logintab = ref(true);
 
+const submitted = ref(false);
+
+const submitHandler = async () => {
+  await new Promise(r => {
+    setTimeout(r, 1000)
+  })
+  submitted.value = true;
+}
+
 </script>
 
 <template>
@@ -14,18 +23,59 @@ let logintab = ref(true);
   </div>
   <!-- https://formkit.com/essentials/styling -->
   <div class="forms-container" v-if="logintab">
-    <FormKit type="form" >
-      <FormKit type="text" name="name" id="name" label="Username or e-mail" />
-      <FormKit type="password" name="password" id="password" label="Password" />
-      <FormKit type="checkbox" name="remember" id="remember" label="Remember me" />
+    <FormKit type="form" @submit="submitHandler" submit-label="Log In" :actions="false">
+      <FormKit type="text"
+               name="name"
+               id="name"
+               label="Username or e-mail"
+      />
+
+      <FormKit type="password"
+               name="password"
+               id="password"
+               label="Password"
+      />
+
+      <FormKit type="checkbox"
+               name="remember"
+               id="remember"
+               label="Remember me"
+      />
     </FormKit>
   </div>
-  <div class="forms-container" v-else >
-    <FormKit type="form" >
-      <FormKit type="text" name="username" id="username" label="Username" />
-      <FormKit type="email" name="email" id="email" label="E-mail address" />
-      <FormKit type="password" name="password" id="password" label="Password" />
-      <FormKit type="password" name="repeatpassword" id="repeatpassword" label="Repeat Password" />
+  <div class="forms-container" v-else>
+    <FormKit type="form" @submit="submitHandler" submit-label="Log In" :actions="false">
+
+      <FormKit type="text"
+               name="username"
+               id="username"
+               label="Username"
+               validation="required"
+      />
+
+      <FormKit type="email"
+               name="email"
+               id="email"
+               label="E-mail address"
+               validation="required"
+      />
+
+      <FormKit type="password"
+               name="password"
+               id="password"
+               label="Password"
+               validation="required|length:8|matches:/[0-9]/"
+               validation-visibility="live"
+               :validation-messages="{ matches: 'Passwords must include a number.' }"
+      />
+
+      <FormKit type="password"
+               name="password_confirm"
+               id="password_confirm"
+               label="Repeat Password"
+               validation="required|confirm"
+               validation-visibility="live"
+      />
     </FormKit>
   </div>
 </template>
