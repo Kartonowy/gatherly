@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {ref} from "vue";
+import axios from "axios";
 
 type loginForm = {
   name: string,
@@ -19,10 +20,7 @@ let logintab = ref(true);
 const submitted = ref(false);
 
 const loginHandler = async (x: loginForm) => {
-  console.log(x)
-  await new Promise(r => {
-    setTimeout(r, 1000)
-  })
+  const placeholder = await axios.post("/api/log-in", x)
   submitted.value = true;
 }
 
