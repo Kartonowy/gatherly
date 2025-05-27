@@ -3,355 +3,346 @@
   src: url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Space+Grotesk:wght@300..700&display=swap') format('opentype');
 }
 
-
 @font-face {
   font-family: 'Sniglet';
   src: url('https://fonts.googleapis.com/css2?family=Sniglet:wght@400;800&display=swap') format('ttf');
 }
 
-//variables
-$text-color-blue:#5a5dbc;
+// Color Variables
+$primaryTextColor: #5a5dbc;
+$inputBgColor: #e0eaff;
 
-$input-background-color-light-blue:#e0eaff;
+$accentColorDark: #10a46e;
+$accentColorLight: #d6df7e;
 
-$dark-green:#10a46e;
-$lime-green:#d6df7e;
+$backgroundBase: #feeff6;
+$hoverTileColor: #f8b7d5;
+$highlightColor: #d582ae;
+$linkHoverColor: #dd4b9b;
 
-$very-light-pink:#feeff6;
-$light-pink:#f8b7d5;
-$mid-pink-color:#d582ae;
-$text-color-hottest-pink:#dd4b9b;
+// Close button variables
+$dialogCloseBgColor: #faa49a;
+$dialogCloseBorderColor: #e9897e;
+$errorTextColor: #c4391d;
 
 * {
   margin: 0;
 }
 #app {
-    display: flex;
-    flex-flow: wrap row;
-    /* 3 marca */
-    /* 10 */ 
-    /* 31 */
-    overflow: hidden;
-    font-family: 'Josefin Sans', sans-serif;
+  display: flex;
+  flex-flow: wrap row;
+  overflow: hidden;
+  font-family: 'Josefin Sans', sans-serif;
 
-    main {
-      width: 95%;
-      background-image: url("../dot.svg");
-      background-repeat:repeat;
+  main {
+    width: 95%;
+    background-image: url("../dot.svg");
+    background-repeat: repeat;
 
-      .sleeve-storage{
-        .sleeve-container {
-          display: flex;
-          flex-flow: row wrap;
-          border:$dark-green 3px solid;
-          color:$lime-green;
-          background-color: $very-light-pink;
-          width: 250px;
-          height: 60px;
-          border-radius: 25px;
-          padding: 0.5vmin;
-          align-items: center;
-          -webkit-touch-callout: none;
-          -webkit-user-select: none;
-          -moz-user-select: none;
-          -ms-user-select: none;
-          user-select: none;
-          cursor: grab;
-          opacity: 0.85;
-          transition: 0.1s;
-
-          .content-container {
-            width: 80%;
-            height: 100%;
-
-            p{
-              background-color: $dark-green;
-              border-bottom-right-radius: 25px;
-              border-top-left-radius: 25px;
-              padding-left: 1vmin;
-              margin-top: -0.5vmin;
-              margin-left: -0.5vmin;
-            }
-
-            a {
-              all: unset;
-              color: $mid-pink-color;
-              font-size: 1.5vmin;
-              max-width: 50px;
-              width: 50px;
-              overflow: hidden;
-              white-space: nowrap;
-              text-overflow: ellipsis;
-              padding-left: 0.5vmin;
-            }
-
-            a:hover{
-              color:$text-color-hottest-pink;
-              cursor: pointer;
-              //TODO: wiktor mowi ze toggable, ale ja nie
-            }
-          }
-          button{
-            cursor: pointer;
-            background-color: $lime-green;
-            color:$text-color-blue;
-            border:none;
-            border-radius: 25px;
-            font-size: 180%;
-          }
-        }
-        .active.container{
-          margin-left: 1vw;
-          margin-top: 1vh;
-          .context-menu{
-            color:$text-color-blue;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background-color: $very-light-pink;
-            border-radius: 7px 25px 15px 25px;
-            padding: 1vw 1vh;
-            
-            .tile{
-              transition: 0.1s;
-              width: 6vw;
-              height:2vh;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              padding: 2px;
-
-            }
-            .tile:hover{
-              transform: scale(115%, 115%);
-              background-color:$light-pink;
-              font-weight: 600;
-              border-radius: 10px 25px 15px 25px;
-              cursor: pointer;
-            }
-          }
-        }
-        .sleeve-container:hover{
-          opacity: 1;
-        }
-      }
-    }
-
-    .container-dashboard {
-      width: 5%;
-      height: 100vh;
-      outline: 3px $mid-pink-color solid;
-      display: flex;
-      flex-flow: column nowrap;
-      justify-content: center;
-      align-items: center;
-    
-      .tile {
-        outline: 2px $mid-pink-color solid;
-        background-color: $very-light-pink;
-        width: 5vw;
-        height: 5vw;
+    .sleeve-storage {
+      .sleeve-container {
         display: flex;
+        flex-flow: row wrap;
+        border: $accentColorDark 3px solid;
+        color: $accentColorLight;
+        background-color: $backgroundBase;
+        width: 250px;
+        height: 60px;
+        border-radius: 25px;
+        padding: 0.5vmin;
         align-items: center;
-        justify-content: center;
-        text-transform: uppercase;
-        font-family: 'Sniglet';
-        font-weight: 600;
-        color: $text-color-blue;
-      }
-    }
+        user-select: none;
+        cursor: grab;
+        opacity: 0.85;
+        transition: 0.1s;
 
-    .dialog-container {
-      width:20%;
-      height:100%;
-      position: absolute;
-      left: 80%;
-      outline: 4px $mid-pink-color solid;
-      background-color: $very-light-pink;
-      overflow: hidden;
+        .content-container {
+          width: 80%;
+          height: 100%;
 
-      button, input[type="button"]{
-        cursor: pointer;
-      }
+          p {
+            background-color: $accentColorDark;
+            border-bottom-right-radius: 25px;
+            border-top-left-radius: 25px;
+            padding-left: 1vmin;
+            margin-top: -0.5vmin;
+            margin-left: -0.5vmin;
+          }
 
-      .dialog-header {
-        width: 100%;
-        height: 10%;
+          a {
+            all: unset;
+            color: $highlightColor;
+            font-size: 1.5vmin;
+            max-width: 50px;
+            width: 50px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            padding-left: 0.5vmin;
+          }
 
-        //variables close button
-        $background-color-light-red:#faa49a;
-        $border-color-shadow-mid-red:#e9897e;
-        $text-color-red:#c4391d;
-
-        button{
-          width:25%;
-          height: 25%;
-          background-color:$background-color-light-red;
-          border-top:none;
-          border-left: none;
-          border-right:1px $border-color-shadow-mid-red solid;
-          border-bottom:1px $border-color-shadow-mid-red solid;
-          border-radius: 0px 0px 15px 0px;
-          color:$text-color-red;
-          font-weight: 700;
-          box-shadow: 1px 1px $border-color-shadow-mid-red;
-        }
-      }
-    
-      .dialog-content {
-        width: 100%;
-        height: 80%;
-        color:$text-color-blue;
-
-        input[type="text"], input[type="url"]{
-          border:0.23em $dark-green solid;
-          width:18vw;
-          height:3vh;
-          border-radius:10px 25px 15px 25px;
-          background-color: $input-background-color-light-blue;
-          color: $text-color-blue;
+          a:hover {
+            color: $linkHoverColor;
+            cursor: pointer;
+          }
         }
 
-        form{
-          padding: 1vw;
+        button {
+          cursor: pointer;
+          background-color: $accentColorLight;
+          color: $primaryTextColor;
+          border: none;
+          border-radius: 25px;
+          font-size: 180%;
+        }
+      }
+
+      .active.container {
+        margin-left: 1vw;
+        margin-top: 1vh;
+
+        .context-menu {
+          color: $primaryTextColor;
           display: flex;
           flex-direction: column;
-          align-items: center;
           justify-content: center;
-          line-height: 2.5vh;
+          align-items: center;
+          background-color: $backgroundBase;
+          border-radius: 7px 25px 15px 25px;
+          padding: 1vw 1vh;
 
-          label{
-            text-transform: capitalize;
-            font-weight: 600;
-          }
-
-          #submit{
-            width:9vw;
-            height: 3vh;
-            background-color: $lime-green;
-            color: $dark-green;
-            text-transform: uppercase;
-            font-weight: 700;
-            border-radius: 25px;
-            border: none;
-            margin:1em;
-            border-right: $dark-green 1px solid;
-            border-bottom: $dark-green 1px solid;
-            box-shadow: 1px 1px;
-          }
-        }
-
-        .theme-select, .locale-select{
-          width: 100%;
-          height: 3em;
-          padding: 0.2em;
-
-          select{
-            border-radius: 25px;
-            width: 11vw;
-            height:3vh;
-            margin-left: 0.5em;
-            background-color:$input-background-color-light-blue;
-            border-radius:10px 25px 15px 25px;
-            border:0.2em $dark-green solid;
-            color:$text-color-blue;
-            font-weight: 600;
-            padding: 0.2em;
-          }
-
-          button{
-            width: 5vw;
-            height:2.5vh;
-            border-radius: 17px;
-            margin-left: 0.7em;
-            background-color:$light-pink;
-            border-right: $mid-pink-color 1px solid;
-            border-bottom: $mid-pink-color 1px solid;
-            box-shadow: 1px 1px;
-            border:none;
-            color:$text-color-hottest-pink;
-            font-weight: 600;
-          }
-        }
-
-        .switch{
-          display: flex;
-          align-items:center;
-          justify-content: space-evenly;
-          flex-direction: row;
-          width:8em;
-          height:2.3em;
-          background-color: $lime-green;
-          border-radius:30px;
-          margin-left: 1em;
-          font-size: 0.8em;
-          .form-switch{
-            width:4em;
-            height: 2.3em;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: 0.3s ease;
-
-            &.selected{
-              background-color: #ccd75f;
-              width:4em;
-              font-size: 1.1em;
-              transition: 0.3s ease;
-            }
-            &.left-rounded {
-              border-radius: 30px 0 0 30px;
-            }
-            &.right-rounded {
-              border-radius: 0 30px 30px 0;
-            }
-          }
-        }
-        .forms-container{
-          .formkit-inner, .formkit-outer{
-            border: 0;
-            outline:none;
-            box-shadow: none;
-          }
-          .formkit-input{
-            border: $text-color-hottest-pink 1px solid;
-            border-radius: 25px;
-            max-width: 20em;
-            width:15em;
-            height: 2em;
-            background-color: $input-background-color-light-blue;
-            outline: none;
-            box-shadow: none;
-          }
-          .formkit-input:focus{
-            border:$text-color-hottest-pink 2px solid;
+          .tile {
             transition: 0.1s;
-          }
-          input[type="checkbox"]{
-            height: 1em;
-            width: 1em;
-          }
-          input[type="checkbox"]:checked{
-
-          }
-          button[type="submit"]{
-            background-color: $mid-pink-color;
-            width:10em;
-            height:2.5em;
+            width: 6vw;
+            height: 2vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-weight: 600;
-            border: $text-color-hottest-pink 2px solid;
+            padding: 2px;
           }
 
-          $text-color-red:#c4391d;
-          .formkit-message{
-            color:$text-color-red;
-            font-weight: 500;
+          .tile:hover {
+            transform: scale(115%, 115%);
+            background-color: $hoverTileColor;
+            font-weight: 600;
+            border-radius: 10px 25px 15px 25px;
+            cursor: pointer;
           }
         }
       }
+
+      .sleeve-container:hover {
+        opacity: 1;
+      }
     }
+  }
+
+  .container-dashboard {
+    width: 5%;
+    height: 100vh;
+    outline: 3px $highlightColor solid;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+
+    .tile {
+      outline: 2px $highlightColor solid;
+      background-color: $backgroundBase;
+      width: 5vw;
+      height: 5vw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-transform: uppercase;
+      font-family: 'Sniglet';
+      font-weight: 600;
+      color: $primaryTextColor;
+    }
+  }
+
+  .dialog-container {
+    width: 20%;
+    height: 100%;
+    position: absolute;
+    left: 80%;
+    outline: 4px $highlightColor solid;
+    background-color: $backgroundBase;
+    overflow: hidden;
+
+    button, input[type="button"] {
+      cursor: pointer;
+    }
+
+    .dialog-header {
+      width: 100%;
+      height: 10%;
+
+      button {
+        width: 25%;
+        height: 25%;
+        background-color: $dialogCloseBgColor;
+        border: none;
+        border-right: 1px $dialogCloseBorderColor solid;
+        border-bottom: 1px $dialogCloseBorderColor solid;
+        border-radius: 0 0 15px 0;
+        color: $errorTextColor;
+        font-weight: 700;
+        box-shadow: 1px 1px $dialogCloseBorderColor;
+      }
+    }
+
+    .dialog-content {
+      width: 100%;
+      height: 80%;
+      color: $primaryTextColor;
+
+      input[type="text"], input[type="url"] {
+        border: 0.23em $accentColorDark solid;
+        width: 18vw;
+        height: 3vh;
+        border-radius: 10px 25px 15px 25px;
+        background-color: $inputBgColor;
+        color: $primaryTextColor;
+      }
+
+      form {
+        padding: 1vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        line-height: 2.5vh;
+
+        label {
+          text-transform: capitalize;
+          font-weight: 600;
+        }
+
+        #submit {
+          width: 9vw;
+          height: 3vh;
+          background-color: $accentColorLight;
+          color: $accentColorDark;
+          text-transform: uppercase;
+          font-weight: 700;
+          border-radius: 25px;
+          border: none;
+          margin: 1em;
+          border-right: $accentColorDark 1px solid;
+          border-bottom: $accentColorDark 1px solid;
+          box-shadow: 1px 1px;
+        }
+      }
+
+      .theme-select, .locale-select {
+        width: 100%;
+        height: 3em;
+        padding: 0.2em;
+
+        select {
+          border-radius: 25px;
+          width: 11vw;
+          height: 3vh;
+          margin-left: 0.5em;
+          background-color: $inputBgColor;
+          border-radius: 10px 25px 15px 25px;
+          border: 0.2em $accentColorDark solid;
+          color: $primaryTextColor;
+          font-weight: 600;
+          padding: 0.2em;
+        }
+
+        button {
+          width: 5vw;
+          height: 2.5vh;
+          border-radius: 17px;
+          margin-left: 0.7em;
+          background-color: $hoverTileColor;
+          border: none;
+          box-shadow: 1px 1px;
+          color: $linkHoverColor;
+          font-weight: 600;
+        }
+      }
+
+      .switch {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        flex-direction: row;
+        width: 8em;
+        height: 2.3em;
+        background-color: $accentColorLight;
+        border-radius: 30px;
+        margin-left: 1em;
+        font-size: 0.8em;
+
+        .form-switch {
+          width: 4em;
+          height: 2.3em;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          transition: 0.3s ease;
+
+          &.selected {
+            background-color: #ccd75f;
+            font-size: 1.1em;
+          }
+
+          &.left-rounded {
+            border-radius: 30px 0 0 30px;
+          }
+
+          &.right-rounded {
+            border-radius: 0 30px 30px 0;
+          }
+        }
+      }
+
+      .forms-container {
+        .formkit-inner, .formkit-outer {
+          border: 0;
+          outline: none;
+          box-shadow: none;
+        }
+
+        .formkit-input {
+          border: $linkHoverColor 1px solid;
+          border-radius: 25px;
+          max-width: 20em;
+          width: 15em;
+          height: 2em;
+          background-color: $inputBgColor;
+        }
+
+        .formkit-input:focus {
+          border: $linkHoverColor 2px solid;
+          transition: 0.1s;
+        }
+
+        input[type="checkbox"] {
+          height: 1em;
+          width: 1em;
+        }
+
+        button[type="submit"] {
+          background-color: $highlightColor;
+          width: 10em;
+          height: 2.5em;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-weight: 600;
+          border: $linkHoverColor 2px solid;
+        }
+
+        .formkit-message {
+          color: $errorTextColor;
+          font-weight: 500;
+        }
+      }
+    }
+  }
 }
