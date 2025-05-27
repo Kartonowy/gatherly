@@ -38,9 +38,9 @@ const registerHandler = async (x: registerForm) => {
 </script>
 
 <template>
-  <div class="switch" style="display: inline">
-    <div @click="logintab=true" class="form-switch selected">Log In</div>
-    <div @click="logintab=false" class="form-switch">Sign Up</div>
+  <div class="switch">
+    <div @click="logintab=true" :class="['form-switch', { selected: logintab, 'left-rounded': logintab }]" >Log In</div>
+    <div @click="logintab=false" :class="['form-switch', { selected: !logintab, 'right-rounded': !logintab }]">Sign Up</div>
   </div>
   <!-- https://formkit.com/essentials/styling -->
   <div class="forms-container" v-if="logintab">

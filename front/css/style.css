@@ -47,7 +47,6 @@
 #app main .sleeve-storage .sleeve-container .content-container {
   width: 80%;
   height: 100%;
-  text-overflow: ellipsis;
 }
 #app main .sleeve-storage .sleeve-container .content-container p {
   background-color: #10a46e;
@@ -60,13 +59,13 @@
 #app main .sleeve-storage .sleeve-container .content-container a {
   all: unset;
   color: #d582ae;
-  width: 90%;
   font-size: 1.5vmin;
+  max-width: 50px;
+  width: 50px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   padding-left: 0.5vmin;
-  display: inline-block;
 }
 #app main .sleeve-storage .sleeve-container .content-container a:hover {
   color: #dd4b9b;
@@ -79,6 +78,10 @@
   border: none;
   border-radius: 25px;
   font-size: 180%;
+}
+#app main .sleeve-storage .active.container {
+  margin-left: 1vw;
+  margin-top: 1vh;
 }
 #app main .sleeve-storage .active.container .context-menu {
   color: #5a5dbc;
@@ -127,7 +130,7 @@
   align-items: center;
   justify-content: center;
   text-transform: uppercase;
-  font-family: "Sniglet", sans-serif;
+  font-family: "Sniglet";
   font-weight: 600;
   color: #5a5dbc;
 }
@@ -153,7 +156,6 @@
   background-color: #faa49a;
   border-top: none;
   border-left: none;
-
   border-right: 1px #e9897e solid;
   border-bottom: 1px #e9897e solid;
   border-radius: 0px 0px 15px 0px;
@@ -229,6 +231,75 @@
   border: none;
   color: #dd4b9b;
   font-weight: 600;
+}
+#app .dialog-container .dialog-content .switch {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: row;
+  width: 8em;
+  height: 2.3em;
+  background-color: #d6df7e;
+  border-radius: 30px;
+  margin-left: 1em;
+  font-size: 0.8em;
+}
+#app .dialog-container .dialog-content .switch .form-switch {
+  width: 4em;
+  height: 2.3em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s ease;
+}
+#app .dialog-container .dialog-content .switch .form-switch.selected {
+  background-color: #ccd75f;
+  width: 4em;
+  font-size: 1.1em;
+  transition: 0.3s ease;
+}
+#app .dialog-container .dialog-content .switch .form-switch.left-rounded {
+  border-radius: 30px 0 0 30px;
+}
+#app .dialog-container .dialog-content .switch .form-switch.right-rounded {
+  border-radius: 0 30px 30px 0;
+}
+#app .dialog-container .dialog-content .forms-container .formkit-inner, #app .dialog-container .dialog-content .forms-container .formkit-outer {
+  border: 0;
+  outline: none;
+  box-shadow: none;
+}
+#app .dialog-container .dialog-content .forms-container .formkit-input {
+  border: #dd4b9b 1px solid;
+  border-radius: 25px;
+  max-width: 20em;
+  width: 15em;
+  height: 2em;
+  background-color: #e0eaff;
+  outline: none;
+  box-shadow: none;
+}
+#app .dialog-container .dialog-content .forms-container .formkit-input:focus {
+  border: #dd4b9b 2px solid;
+  transition: 0.1s;
+}
+#app .dialog-container .dialog-content .forms-container input[type=checkbox] {
+  height: 1em;
+  width: 1em;
+}
+#app .dialog-container .dialog-content .forms-container button[type=submit] {
+  background-color: #d582ae;
+  width: 10em;
+  height: 2.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  border: #dd4b9b 2px solid;
+}
+#app .dialog-container .dialog-content .forms-container .formkit-message {
+  color: #c4391d;
+  font-weight: 500;
 }
 
 /*# sourceMappingURL=style.css.map */
