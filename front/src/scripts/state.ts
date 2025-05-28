@@ -2,7 +2,7 @@ import { createGlobalState } from '@vueuse/core'
 
 import { reactive } from 'vue'
 import type { SleeveT } from '../types/sleeve'
-import { DialogKind } from '../types/enums'
+import { DialogKind, Themes } from '../types/enums'
 
 export const useGlobalState = createGlobalState(
     () => {
@@ -12,14 +12,16 @@ export const useGlobalState = createGlobalState(
                 active: boolean,
                 kind: DialogKind,
                 context: SleeveT | null
-            }
+            },
+            theme:Themes
         } = reactive({
             items: [],
             dialog: {
                 active: false,
                 kind: DialogKind.None,
                 context: null
-            }
+            },
+            theme: Themes.Default
         })
 
 
@@ -50,8 +52,29 @@ export const useGlobalState = createGlobalState(
             return state.dialog.context
         }
 
+        const getTheme = () => state.theme
 
-        return { state, getItem, addItem, removeItem, showDialog, setDialog, getDialogContext }
+        const setTheme = (newTheme: Themes) => {
+            state.theme = newTheme
+
+            const head = document.head
+            const existingLink = document.getElementById('theme-link') as HTMLLinkElement
+
+            if (existingLink) {
+                head.removeChild(existingLink)
+            }
+
+            if (state.theme === Themes.None) return
+
+            const link = document.createElement('link')
+            link.id = 'theme-link'
+            link.rel = 'stylesheet'
+            link.href = `../css/${state.theme === Themes.Midnight ? 'style-midnight.css' : 'style.css'}`
+
+            head.appendChild(link);
+        }
+
+        return { state, getItem, addItem, removeItem, showDialog, setDialog, getDialogContext, getTheme, setTheme }
     }
 )
 
