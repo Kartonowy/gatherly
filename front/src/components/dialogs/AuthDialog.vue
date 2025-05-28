@@ -20,16 +20,23 @@ let logintab = ref(true);
 const submitted = ref(false);
 
 const loginHandler = async (x: loginForm) => {
-  const placeholder = await axios.post("/api/log-in", x)
+  const placeholder = await axios.post("http://127.0.0.1:3000/api/log-in", x, {
+    headers: {
+      "Content-Type": "multipart/form-data"
+    }
+  })
+  console.log(placeholder);
   submitted.value = true;
 }
 
 const registerHandler = async (x: registerForm) => {
   console.log(x)
-
-  await new Promise(r => {
-    setTimeout(r, 1000)
+  const placeholder = await axios.post("http://127.0.0.1:3000/api/sign-up", x, {
+    headers: {
+      "Content-Type": "application/json",
+    }
   })
+  console.log(placeholder.data);
   submitted.value = true;
 }
 
@@ -69,7 +76,7 @@ const registerHandler = async (x: registerForm) => {
     <FormKit type="form" @submit="registerHandler" submit-label="Log In" :actions="false">
 
       <FormKit type="text"
-               name="username"
+               name="name"
                id="username"
                label="Username"
                validation="required"
