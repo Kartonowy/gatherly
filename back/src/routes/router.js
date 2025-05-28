@@ -33,14 +33,26 @@ const _createSleeve = createInsertSchema(sleeveTable, {
 
 export const APIrouter = new Elysia({ prefix: "/api" })
     .get('/', (req, res) => { console.log(req, res) })
-    .post("/sign-up", ({ body }) => {
+    .post("/sign-up", async ({ body }) => {
 
-        const data = await db.select().from(usersTable).where(
-            or(
-                eq(usersTable.email, body.email),
-                eq(usersTable.name, body.username)
-            )
+    const data = await db.select().from(usersTable).where(
+        or(
+            eq(usersTable.email, body.email),
+            eq(usersTable.name, body.username)
         )
+    )
+
+    if (data.length !== 0) {
+        return error(409, "Conflict. User exists.")
+    }
+
+    const hash = await argon2.hash()
+
+    await db.insert(usersTable).values({
+        name: body.name,
+        email: body.email,
+        password: hash
+    })
         // second VALIDATION OF CREDENTIALS
         // ADDING TO DATABASE
         // LOGGING IN OD RAZU (JWT)
