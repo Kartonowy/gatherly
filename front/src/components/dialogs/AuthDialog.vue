@@ -23,7 +23,8 @@ const loginHandler = async (x: loginForm) => {
   const placeholder = await axios.post("http://127.0.0.1:3000/api/log-in", x, {
     headers: {
       "Content-Type": "multipart/form-data"
-    }
+    },
+    withCredentials: true
   })
   console.log(placeholder);
   submitted.value = true;
@@ -34,7 +35,8 @@ const registerHandler = async (x: registerForm) => {
   const placeholder = await axios.post("http://127.0.0.1:3000/api/sign-up", x, {
     headers: {
       "Content-Type": "application/json",
-    }
+    },
+    withCredentials: true
   })
   console.log(placeholder.data);
   submitted.value = true;

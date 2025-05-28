@@ -34,15 +34,13 @@ const _createSleeve = createInsertSchema(sleeveTable, {
 export const APIrouter = new Elysia({ prefix: "/api" })
     .post("/sign-up", async ({ body, jwt, cookie: { auth }, set }: any) => {
 
-        console.log(body)
-        // Check i user exists
+        // Check if user exists
         const data = await db.select().from(usersTable).where(
             or(
                 eq(usersTable.email, body.email),
                 eq(usersTable.name, body.username)
             )
         )
-        console.log(data)
         if (data.length !== 0) {
             set.status = 409
             return "user exists"
@@ -72,23 +70,20 @@ export const APIrouter = new Elysia({ prefix: "/api" })
         )
     })
     .post("/log-in", async ({ body, jwt, cookie: { auth }, set }: any) => {
-        console.log(body)
         const user  = await db.select().from(usersTable).where(
             or(
                 eq(usersTable.email, body.name),
                 eq(usersTable.name, body.name)
             )
         );
+
         if (user.length > 1) {
-            console.log("Users too many, " + user.length)
-            set.status = 500
-            return "Somehow many users??? TODO: DELELETE"
+            throw new Error("Query Resulted in 2+ users.")
         }
-        console.log(user)
 
         if (user.length === 0) {
             set.status = 404
-            return "Not found"
+            return "User not found"
         }
 
         if (await argon2.verify(user[0].password, body.password)) {
