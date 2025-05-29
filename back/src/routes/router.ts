@@ -100,7 +100,7 @@ export const APIrouter = new Elysia({ prefix: "/api" })
             ["id"]
         )
     })
-    .post("/boards/", async ({body, jwt, set, headers}: any) => {
+    .post("/boards/", async ({jwt, set, headers}: any) => {
         const authHeader: string = headers["authorization"]
 
         if (!authHeader) {

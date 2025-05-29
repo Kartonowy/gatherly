@@ -1,4 +1,4 @@
-import {Elysia, t} from "elysia"
+import {Elysia} from "elysia"
 import { node } from "@elysiajs/node"
 import { jwt } from "@elysiajs/jwt"
 import {APIrouter} from "./routes/router.js";
