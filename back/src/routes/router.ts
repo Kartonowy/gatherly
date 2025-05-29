@@ -54,10 +54,9 @@ export const APIrouter = new Elysia({ prefix: "/api" })
             password: hash
         }).returning();
 
-        const val = await jwt.sign(user[0])
+        const token = await jwt.sign(user[0])
 
-
-        return "Signed up"
+        return { token }
     }, {
         body: t.Omit(
             _createUser,
@@ -82,12 +81,12 @@ export const APIrouter = new Elysia({ prefix: "/api" })
         }
 
         if (await argon2.verify(user[0].password, body.password)) {
-            const val = await jwt.sign(user[0])
+            const token = await jwt.sign(user[0])
 
             // token auth
 
             set.status = 200
-            return `Sign in as ${val}`
+            return { token }
         } else {
             return error(401, "Invalid credentials")
         }
@@ -101,11 +100,20 @@ export const APIrouter = new Elysia({ prefix: "/api" })
             ["id"]
         )
     })
-    .post("/boards/", async ({body, jwt, cookie: { auth }, set, headers}: any) => {
-        const user = await jwt.verify(auth.value)
+    .post("/boards/", async ({body, jwt, set, headers}: any) => {
+        const authHeader: string = headers["authorization"]
+
+        if (!authHeader) {
+            set.status = 401
+            console.log("No authHeader found")
+            return "Unauthorized"
+        }
+
+        const user = await jwt.verify(authHeader.split(" ")[1])
 
         if (!user) {
             set.status = 401
+            console.log("No user found")
             return "Unauthorized"
         }
 

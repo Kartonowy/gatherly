@@ -1,46 +1,9 @@
 <script setup lang="ts">
 import {ref} from "vue";
-import axios from "axios";
-
-type loginForm = {
-  name: string,
-  password: string,
-  remember: boolean,
-}
-
-type registerForm = {
-  username: string,
-  email: string
-  password: string,
-}
+import {loginHandler, registerHandler} from "../../scripts/api.ts";
 
 
 let logintab = ref(true);
-
-const submitted = ref(false);
-
-const loginHandler = async (x: loginForm) => {
-  const placeholder = await axios.post("http://127.0.0.1:3000/api/log-in", x, {
-    headers: {
-      "Content-Type": "multipart/form-data"
-    },
-    withCredentials: true
-  })
-  console.log(placeholder);
-  submitted.value = true;
-}
-
-const registerHandler = async (x: registerForm) => {
-  console.log(x)
-  const placeholder = await axios.post("http://127.0.0.1:3000/api/sign-up", x, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-    withCredentials: true
-  })
-  console.log(placeholder.data);
-  submitted.value = true;
-}
 
 </script>
 
