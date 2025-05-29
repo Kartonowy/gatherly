@@ -3,17 +3,27 @@ import { node } from "@elysiajs/node"
 import { jwt } from "@elysiajs/jwt"
 import {APIrouter} from "./routes/router.js";
 import { cors } from "@elysiajs/cors"
+import { cookie } from "@elysiajs/cookie";
 
 
 
 const app = new Elysia({ adapter: node() })
+    .use(cookie())
     .use(
         jwt({
             name: "jwt",
             secret: "placeholder_secret"
         })
     )
-    .use(cors())
+    .use(cors(
+        {
+            origin: "http://localhost:5173",
+            credentials: true
+        }
+    ))
+    .onRequest((context: any) => {
+        console.log("Incoming Headers:", context.request.headers)
+    })
     .use(APIrouter)
     .listen(3000, ({ hostname, port }: { hostname: string, port: number}) => {
         console.log(`Elysia listening on ${hostname}:${port}`)

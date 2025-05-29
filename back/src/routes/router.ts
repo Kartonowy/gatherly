@@ -32,7 +32,7 @@ const _createSleeve = createInsertSchema(sleeveTable, {
 
 
 export const APIrouter = new Elysia({ prefix: "/api" })
-    .post("/sign-up", async ({ body, jwt, cookie: { auth }, set }: any) => {
+    .post("/sign-up", async ({ body, jwt, set }: any) => {
 
         // Check if user exists
         const data = await db.select().from(usersTable).where(
@@ -48,20 +48,15 @@ export const APIrouter = new Elysia({ prefix: "/api" })
 
         const hash = await argon2.hash(body.password)
 
-        await db.insert(usersTable).values({
+        const user = await db.insert(usersTable).values({
             name: body.name,
             email: body.email,
             password: hash
-        })
+        }).returning();
 
-        auth.set({
-            value: await jwt.sign(body.name),
-            httpOnly: true,
-            maxAge: 86400,
-            path: '/'
-        })
+        const val = await jwt.sign(user[0])
 
-        set.status = 200;
+
         return "Signed up"
     }, {
         body: t.Omit(
@@ -69,7 +64,7 @@ export const APIrouter = new Elysia({ prefix: "/api" })
             ["id"]
         )
     })
-    .post("/log-in", async ({ body, jwt, cookie: { auth }, set }: any) => {
+    .post("/log-in", async ({ body, jwt, set }: any) => {
         const user  = await db.select().from(usersTable).where(
             or(
                 eq(usersTable.email, body.name),
@@ -87,15 +82,12 @@ export const APIrouter = new Elysia({ prefix: "/api" })
         }
 
         if (await argon2.verify(user[0].password, body.password)) {
-            auth.set({
-                value: await jwt.sign(body.name),
-                httpOnly: true,
-                maxAge: 86400,
-                path: '/'
-            })
+            const val = await jwt.sign(user[0])
+
+            // token auth
 
             set.status = 200
-            return `Sign in as ${auth.value}`
+            return `Sign in as ${val}`
         } else {
             return error(401, "Invalid credentials")
         }
@@ -108,6 +100,17 @@ export const APIrouter = new Elysia({ prefix: "/api" })
             _createBoard,
             ["id"]
         )
+    })
+    .post("/boards/", async ({body, jwt, cookie: { auth }, set, headers}: any) => {
+        const user = await jwt.verify(auth.value)
+
+        if (!user) {
+            set.status = 401
+            return "Unauthorized"
+        }
+
+        set.status = 200
+        return db.select().from(boardsTable).where(eq(boardsTable.owner, user.id));
     })
     .post("/board/", async ({body, error}: any) => {
             // Not adding dual eq check for sakes of future, might add collaborations meaning we have to check
