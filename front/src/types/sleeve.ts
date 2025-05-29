@@ -21,7 +21,6 @@ export class SleeveT {
 
         if (!_sleevekey) {
             this.sleevekey = Math.round(Math.random() * Date.now()) / 1000000
-            console.log(this.sleevekey)
         } else {
             this.sleevekey = _sleevekey
         }

@@ -1,21 +1,22 @@
 import axios  from "axios";
-import {useGlobalState} from "./state.ts";
-import {SleeveT} from "../types/sleeve.ts";
 
 export async function getBoards() {
-    const { setBoard } = useGlobalState();
-
     const token = localStorage.getItem("auth-token");
-    const boards = await axios.post("/api/boards", {}, {
+
+    return await axios.post("/api/boards", {}, {
         headers: {
             "Content-Type": "application/json",
             'Authorization': `Bearer ${token}`
         },
         withCredentials: true
     })
+}
 
-    const sleeves = await axios.post("/api/sleeve", {
-            board_id: boards.data[0].id
+export async function getBoard(boardId: number) {
+    const token = localStorage.getItem("auth-token");
+
+    return await axios.post("/api/sleeve", {
+            board_id: boardId,
         },
         {
             headers: {
@@ -24,24 +25,9 @@ export async function getBoards() {
             },
             withCredentials: true
         })
-
-    console.log(sleeves.data)
-
-
-
-    setBoard(sleeves.data.map((e: any) => {
-                const s  = new SleeveT( e.name, e.url)
-                s.addHook(() => {
-                    s.changePos!(e.position_x, e.position_y)
-                })
-                return s
-            }
-        )
-    )
 }
 
-
-type loginForm = {
+    type loginForm = {
     name: string,
     password: string,
     remember: boolean,

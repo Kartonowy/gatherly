@@ -3,7 +3,7 @@ export enum DialogKind {
     SleeveAdd,
     Settings,
     Auth,
-    Placeholder, //TODO: Replace
+    Board,
     None
 }
 

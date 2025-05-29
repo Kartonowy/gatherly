@@ -22,8 +22,9 @@ const tiles: TileBindable[] = [
       setDialog(DialogKind.Auth, null);
       showDialog(true);
     }],
-    ["boards", () => {
-        getBoards()
+    ["board", () => {
+      setDialog(DialogKind.Board, null);
+      showDialog(true);
     }],
     ["???", () => {
         for (let s of sleeves) {
