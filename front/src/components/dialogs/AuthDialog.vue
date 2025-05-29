@@ -1,39 +1,9 @@
 <script setup lang="ts">
 import {ref} from "vue";
-
-type loginForm = {
-  name: string,
-  password: string,
-  remember: boolean,
-}
-
-type registerForm = {
-  username: string,
-  email: string
-  password: string,
-}
+import {loginHandler, registerHandler} from "../../scripts/api.ts";
 
 
 let logintab = ref(true);
-
-const submitted = ref(false);
-
-const loginHandler = async (x: loginForm) => {
-  console.log(x)
-  await new Promise(r => {
-    setTimeout(r, 1000)
-  })
-  submitted.value = true;
-}
-
-const registerHandler = async (x: registerForm) => {
-  console.log(x)
-
-  await new Promise(r => {
-    setTimeout(r, 1000)
-  })
-  submitted.value = true;
-}
 
 </script>
 
@@ -71,7 +41,7 @@ const registerHandler = async (x: registerForm) => {
     <FormKit type="form" @submit="registerHandler" submit-label="Log In" :actions="false">
 
       <FormKit type="text"
-               name="username"
+               name="name"
                id="username"
                label="Username"
                validation="required"
