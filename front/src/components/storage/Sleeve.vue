@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Label from './Label.vue';
 import ContextButton from './ContextButton.vue';
+import Tag from './Tag.vue';
 
 import { useDraggable, useElementHover, type Position } from '@vueuse/core';
 import {type Ref, ref, type ShallowRef, useTemplateRef, watch} from 'vue';
@@ -68,7 +69,7 @@ sleeve.changePos = (newx: number, newy: number) => {
 <template>
     <div class="sleeve-container" ref="el" :style="style" style="position: fixed;">
         <div class="content-container">
-            <Label :text-raw="sleeve.label" />
+            <Label :textRaw="sleeve.label" />
             <a @click.prevent :style="!isHovered ? 'display: none' : '' " :href="sleeve.url.toString()">{{ sleeve.url.toString() }}</a>
         </div>
         <ContextButton :toggle="toggle"/>

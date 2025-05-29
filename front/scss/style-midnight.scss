@@ -81,10 +81,15 @@ body {
             font-size: 1.5vmin;
             max-width: 50px;
             width: 50px;
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            padding-left: 0.5vmin;
+            word-break: break-word;
+            white-space: normal;
+          }
+
+          .tag{
+            border-radius: 50%;
+            background-color: $highlightColor;
+            width: 1vw;
+            height: 1vh;
           }
 
           a:hover {
@@ -202,6 +207,11 @@ body {
       width: 100%;
       height: 80%;
       color: $primaryTextColor;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      margin-left: 10px;
 
       input[type="text"], input[type="url"] {
         border: 0.23em $accentColorDark solid;

@@ -3,3 +3,7 @@ export type Position = {
     y: number
 }
 
+export type TagT = {
+  bgColor?: string,
+  name?: string
+}
