@@ -29,11 +29,15 @@ export async function getBoards() {
 
 
 
-    setBoard(sleeves.data.map((e: any) => new SleeveT(
-        e.name,
-        e.url,
-    )))
-    // state.board = boards.data[0]
+    setBoard(sleeves.data.map((e: any) => {
+                const s  = new SleeveT( e.name, e.url)
+                s.addHook(() => {
+                    s.changePos!(e.position_x, e.position_y)
+                })
+                return s
+            }
+        )
+    )
 }
 
 
