@@ -139,7 +139,7 @@ export const APIrouter = new Elysia({ prefix: "/api" })
         return db.select().from(sleeveTable).where(eq(sleeveTable.board, Number(body.board_id)));
     }, {
         body: t.Object({
-            board_id: t.String()
+            board_id: t.Number()
         })
     })
     .post("/add-sleeve", async ({body}: any) => {

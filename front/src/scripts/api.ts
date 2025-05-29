@@ -1,9 +1,11 @@
-import axios from "axios";
+import axios  from "axios";
+import {useGlobalState} from "./state.ts";
+import {SleeveT} from "../types/sleeve.ts";
 
 export async function getBoards() {
-    console.log("getBoards");
+    const { setBoard } = useGlobalState();
+
     const token = localStorage.getItem("auth-token");
-    console.log(token)
     const boards = await axios.post("/api/boards", {}, {
         headers: {
             "Content-Type": "application/json",
@@ -11,7 +13,27 @@ export async function getBoards() {
         },
         withCredentials: true
     })
-    console.log(boards);
+
+    const sleeves = await axios.post("/api/sleeve", {
+            board_id: boards.data[0].id
+        },
+        {
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization': `Bearer ${token}`
+            },
+            withCredentials: true
+        })
+
+    console.log(sleeves.data)
+
+
+
+    setBoard(sleeves.data.map((e: any) => new SleeveT(
+        e.name,
+        e.url,
+    )))
+    // state.board = boards.data[0]
 }
 
 
