@@ -1,5 +1,4 @@
 import { mount } from '@vue/test-utils'
-import { ref } from 'vue'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import * as stateModule from '../src/scripts/state'
 import { Themes, Languages } from '../src/types/enums'

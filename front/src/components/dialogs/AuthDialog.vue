@@ -11,23 +11,15 @@ let logintab = ref(true);
 </script>
 
 <template>
+    <div v-if="state.isLoggedIn">
+      <button @click="logout">Log Out</button>
+    </div>
+    <div v-else>
   <div class="switch">
     <div @click="logintab=true" :class="['form-switch', { selected: logintab, 'left-rounded': logintab }]" >Log In</div>
     <div @click="logintab=false" :class="['form-switch', { selected: !logintab, 'right-rounded': !logintab }]">Sign Up</div>
   </div>
   <!-- https://formkit.com/essentials/styling -->
-  <div class="forms-container" v-if="logintab">
-    <FormKit type="form" @submit="loginHandler" submit-label="Log In" :actions="false">
-      <FormKit type="text"
-               name="name"
-               id="name"
-               label="Username or e-mail"
-      />
-
-
-      <button @click="logout">Log Out</button>
-  </div>
-  <div v-else>
     <div class="switch" style="display: inline">
       <div @click="logintab=true" class="form-switch selected">Log In</div>
       <div @click="logintab=false" class="form-switch">Sign Up</div>
@@ -95,7 +87,7 @@ let logintab = ref(true);
         />
       </FormKit>
     </div>
-  </div>
+    </div>
 </template>
 
 <style scoped>
