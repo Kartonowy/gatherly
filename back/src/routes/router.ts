@@ -5,6 +5,7 @@ import {boardsTable, sleeveTable, usersTable} from "../db/schema.js";
 import {db} from "../db/index.js";
 import {eq, or} from "drizzle-orm";
 import * as argon2 from "argon2";
+import cors from "@elysiajs/cors";
 
 
 
@@ -135,19 +136,58 @@ export const APIrouter = new Elysia({ prefix: "/api" })
                 id: t.String()
             })
         })
+    .post("/add-board", async ({body, jwt, headers, set}: any) => {
+
+        const authHeader: string = headers["authorization"]
+
+        if (!authHeader) {
+            set.status = 401
+            console.log("No authHeader found")
+            return "Unauthorized"
+        }
+
+        const user = await jwt.verify(authHeader.split(" ")[1])
+
+        const res = await db.insert(boardsTable).values({
+            name: body.name,
+            owner: user.id
+    }).returning()
+
+    const { id } = res[0]
+    return { id }
+})
     .post("/sleeve", async ({body}: any) => {
         return db.select().from(sleeveTable).where(eq(sleeveTable.board, Number(body.board_id)));
     }, {
         body: t.Object({
-            board_id: t.String()
+            board_id: t.Number()
         })
     })
+    .use(cors())
     .post("/add-sleeve", async ({body}: any) => {
-        console.log(await db.insert(sleeveTable).values([{...body}]))
-    },
-        {
-            body: t.Omit(
-                _createSleeve,
-                ["id"]
-            )
-        })
+        const s = await db.insert(sleeveTable).values([{...body.sleeve}]).returning()
+            return {
+                key: s[0].id
+            }
+    })
+    .post("/edit-sleeve/", async ({body}: any) => {
+        await db.update(sleeveTable)
+            .set({
+                name: body.sleeve.name,
+                url: body.sleeve.url,
+                summary: body.sleeve.summary,
+                tags: body.sleeve.tags
+            })
+            .where(eq(sleeveTable.board, Number(body.id)))
+    })
+    .post("/delete-sleeve/", async ({body}: any) => {
+        await db.delete(sleeveTable).where(eq(sleeveTable.board, Number(body.id)))
+    })
+    .post("/pos-sleeve/:id", async ({body, params}: any) => {
+        await db.update(sleeveTable)
+            .set({
+                position_y: body.position.y,
+                position_x: body.position.x,
+            })
+            .where(eq(sleeveTable.board, Number(params.id)))
+    })

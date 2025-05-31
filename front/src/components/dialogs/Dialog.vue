@@ -1,12 +1,11 @@
 <script setup lang="ts">
 
 import {useGlobalState} from "../../scripts/state.ts";
-import EditContextDialog from "./EditContextDialog.vue";
-import AddContextDialog from "./AddContextDialog.vue";
-import PlaceholderContextDialog from "./PlaceholderContextDialog.vue";
 import SettingsDialog from "./SettingsDialog.vue";
 import { DialogKind } from "../../types/enums.ts";
 import AuthDialog from "./AuthDialog.vue";
+import BoardDialog from "./BoardDialog.vue";
+import SleeveContextDialog from "./SleeveContextDialog.vue";
 
 const { state, showDialog } = useGlobalState()
 
@@ -18,10 +17,9 @@ const { state, showDialog } = useGlobalState()
       <button @click="showDialog(false)">x</button>
     </div>
     <div class="dialog-content">
-      <EditContextDialog v-if="state.dialog.kind == DialogKind.SleeveEdit" />
-      <AddContextDialog v-else-if="state.dialog.kind == DialogKind.SleeveAdd" />
+      <SleeveContextDialog v-if="state.dialog.kind == DialogKind.Sleeve" />
       <AuthDialog v-else-if="state.dialog.kind == DialogKind.Auth" />
-      <PlaceholderContextDialog v-else-if="state.dialog.kind == DialogKind.Placeholder" />
+      <BoardDialog v-else-if="state.dialog.kind == DialogKind.Board" />
       <SettingsDialog v-else-if="state.dialog.kind == DialogKind.Settings" />
     </div>
   </div>

@@ -35,6 +35,8 @@ export const sleeveTable = pgTable("sleeves", {
     url: text("url").notNull(),
     summary: text("summary"),
     tags: text("tags").array().default(sql`'{}'::text[]`),
+    position_x: integer("position_x").notNull(),
+    position_y: integer("position_y").notNull(),
     board: integer()
 });
 

@@ -7,32 +7,45 @@ import { DialogKind } from '../types/enums'
 export const useGlobalState = createGlobalState(
     () => {
         let state: { 
-            items: SleeveT[],
+            board: SleeveT[],
+            board_id: number,
             dialog: {
                 active: boolean,
                 kind: DialogKind,
                 context: SleeveT | null
-            }
+            },
+            isLoggedIn: boolean
         } = reactive({
-            items: [],
+            board: [],
+            board_id: 0,
             dialog: {
                 active: false,
                 kind: DialogKind.None,
                 context: null
-            }
+            },
+            isLoggedIn: false,
         })
+
+        let setBoard = (_board: SleeveT[], _board_id: number) => {
+            state.board = _board
+            state.board_id = _board_id
+        }
+
+        let getBoardId = () => {
+            return state.board_id
+        }
 
 
         let getItem = (sleevekey?: PropertyKey) => {
-            return state.items.find((e) => e.sleevekey == sleevekey)
+            return state.board.find((e) => e.sleevekey == sleevekey)
         }
 
         let addItem = (item: SleeveT) => {
-            state.items.push(item)
+            state.board.push(item)
         }
 
         let removeItem = (_sleevekey: PropertyKey) => {
-            state.items = state.items.filter((e) => {
+            state.board = state.board.filter((e) => {
                 return e.sleevekey != _sleevekey
             })
         }
@@ -51,7 +64,9 @@ export const useGlobalState = createGlobalState(
         }
 
 
-        return { state, getItem, addItem, removeItem, showDialog, setDialog, getDialogContext }
+        return { state, getItem, addItem, removeItem,
+            showDialog, setDialog, getDialogContext,
+            setBoard, getBoardId }
     }
 )
 

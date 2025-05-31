@@ -13,7 +13,7 @@ type TileBindable = [
 
 const tiles: TileBindable[] = [
     ["add", () => {
-      setDialog(DialogKind.SleeveAdd, null);
+      setDialog(DialogKind.Sleeve, null);
       showDialog(true);
     }],
     ["sort", sort],
@@ -22,8 +22,9 @@ const tiles: TileBindable[] = [
       setDialog(DialogKind.Auth, null);
       showDialog(true);
     }],
-    ["boards", () => {
-        getBoards()
+    ["board", () => {
+      setDialog(DialogKind.Board, null);
+      showDialog(true);
     }],
     ["???", () => {
         for (let s of sleeves) {
