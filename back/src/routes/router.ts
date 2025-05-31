@@ -143,11 +143,36 @@ export const APIrouter = new Elysia({ prefix: "/api" })
         })
     })
     .post("/add-sleeve", async ({body}: any) => {
-        console.log(await db.insert(sleeveTable).values([{...body}]))
+        console.log("cos")
+        const s = await db.insert(sleeveTable).values([{...body.sleeve}]).returning()
+            return {
+                key: s[0].id
+            }
     },
         {
             body: t.Omit(
                 _createSleeve,
-                ["id"]
+                ["id", "board_id"]
             )
         })
+    .post("/edit-sleeve/", async ({body}: any) => {
+        await db.update(sleeveTable)
+            .set({
+                name: body.sleeve.name,
+                url: body.sleeve.url,
+                summary: body.sleeve.summary,
+                tags: body.sleeve.tags
+            })
+            .where(eq(sleeveTable.board, Number(body.id)))
+    })
+    .post("/delete-sleeve/", async ({body}: any) => {
+        await db.delete(sleeveTable).where(eq(sleeveTable.board, Number(body.id)))
+    })
+    .post("/pos-sleeve/:id", async ({body, params}: any) => {
+        await db.update(sleeveTable)
+            .set({
+                position_y: body.position.y,
+                position_x: body.position.x,
+            })
+            .where(eq(sleeveTable.board, Number(params.id)))
+    })

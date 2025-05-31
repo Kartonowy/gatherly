@@ -4,29 +4,30 @@ import {useGlobalState} from "../../scripts/state.ts";
 import {SleeveT} from "../../types/sleeve.ts";
 import {getBoard, getBoards} from "../../scripts/api.ts";
 import {onMounted, ref, watch} from "vue";
+import axios from "axios";
 
 const boards: any = ref(null)
 const loading = ref(false);
 const error = ref(null);
 const selected = ref(null)
 
-const { setBoard, state } = useGlobalState();
+const { setBoard } = useGlobalState();
 
 
 watch(selected, async (newVal: any, _oldVal) => {
-      console.log(newVal);
-      const sleeves = await getBoard(newVal.id)
+      if (newVal) {
+        const sleeves = await getBoard(newVal.id)
 
-      console.log(sleeves)
-      setBoard(sleeves.data.map((e: any) => {
-                const s  = new SleeveT(e.name, e.url)
-                s.addHook(() => {
-                  s.changePos!(e.position_x, e.position_y)
-                })
-                return s
-              }
-          )
-      )
+        setBoard(sleeves.data.map((e: any) => {
+                  const s  = new SleeveT(e.name, e.url)
+                  s.addHook(() => {
+                    s.changePos!(e.position_x, e.position_y)
+                  })
+                  return s
+                },
+            ), newVal
+        )
+      }
     }
 )
 
@@ -36,6 +37,7 @@ async function fetchBoards() {
 
   try {
     boards.value = (await getBoards()).data;
+    selected.value = boards.value[0]
   } catch (err: any) {
     error.value = err.toString()
   } finally {
@@ -45,7 +47,6 @@ async function fetchBoards() {
 
 onMounted(async () => {
   await fetchBoards()
-  console.log(boards)
 })
 
 </script>

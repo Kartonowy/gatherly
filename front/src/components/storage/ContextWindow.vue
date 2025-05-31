@@ -27,7 +27,7 @@ const tiles: TileBindable[] = [
         window.open(sleeve?.url.toString(), '_blank')
     }],
     ["edit", () => {
-        setDialog(DialogKind.SleeveEdit, sleeve)
+        setDialog(DialogKind.Sleeve, sleeve)
         showDialog(true)
     }],
     ["tag"],

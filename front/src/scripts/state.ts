@@ -8,22 +8,31 @@ export const useGlobalState = createGlobalState(
     () => {
         let state: { 
             board: SleeveT[],
+            board_id: number,
             dialog: {
                 active: boolean,
                 kind: DialogKind,
                 context: SleeveT | null
-            }
+            },
+            isLoggedIn: boolean
         } = reactive({
             board: [],
+            board_id: 0,
             dialog: {
                 active: false,
                 kind: DialogKind.None,
                 context: null
-            }
+            },
+            isLoggedIn: false,
         })
 
-        let setBoard = (_board: SleeveT[]) => {
+        let setBoard = (_board: SleeveT[], _board_id: number) => {
             state.board = _board
+            state.board_id = _board_id
+        }
+
+        let getBoardId = () => {
+            return state.board_id
         }
 
 
@@ -55,7 +64,9 @@ export const useGlobalState = createGlobalState(
         }
 
 
-        return { state, getItem, addItem, removeItem, showDialog, setDialog, getDialogContext, setBoard }
+        return { state, getItem, addItem, removeItem,
+            showDialog, setDialog, getDialogContext,
+            setBoard, getBoardId }
     }
 )
 

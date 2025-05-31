@@ -16,9 +16,13 @@ const app = new Elysia({ adapter: node() })
     .use(cors(
         {
             origin: "http://localhost:5173",
-            credentials: true
+            credentials: true,
+            allowedHeaders: ["Content-Type"]
         }
     ))
+    .onRequest((e: any) => {
+        console.log(e)
+    })
     .use(APIrouter)
     .listen(3000, ({ hostname, port }: { hostname: string, port: number}) => {
         console.log(`Elysia listening on ${hostname}:${port}`)

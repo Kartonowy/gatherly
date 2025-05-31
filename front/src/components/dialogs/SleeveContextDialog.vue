@@ -3,21 +3,32 @@
 import {useGlobalState} from "../../scripts/state.ts";
 import {ref} from "vue";
 import {SleeveT} from "../../types/sleeve.ts";
-import {insertSleeve} from "../../scripts/api.ts";
+import {insertSleeve, updateSleeve} from "../../scripts/api.ts";
 
 const { addItem, getDialogContext, showDialog } = useGlobalState()
 
-const label = ref(getDialogContext()?.label??"");
-const url = ref(getDialogContext()?.url??"")
-const summary = ref(getDialogContext()?.summary??"");
+let label = ref("");
+let url = ref("")
+let summary = ref("");
+
+
+const context = getDialogContext()
+
+if (context == null) {
+    const context = new SleeveT(label.value, url.value)
+    context.summary = summary
+    await insertSleeve(context)
+    addItem(context);
+} else {
+    label = context.label;
+    url = context.url;
+    summary = context.summary;
+}
 
 async function onSubmit() {
-  const s = new SleeveT(label.value, url.value)
-  s.summary = summary
-  await insertSleeve(s)
-  addItem(s);
-  showDialog(false)
+  await updateSleeve(context!)
 }
+console.log("chuj")
 
 </script>
 
@@ -41,7 +52,6 @@ async function onSubmit() {
 </template>
 
 <style scoped>
-
 #submit {
   width: 25%;
 }

@@ -1,6 +1,5 @@
 export enum DialogKind {
-    SleeveEdit,
-    SleeveAdd,
+    Sleeve,
     Settings,
     Auth,
     Board,
