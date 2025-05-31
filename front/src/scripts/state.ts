@@ -2,7 +2,7 @@ import { createGlobalState } from '@vueuse/core'
 
 import { reactive } from 'vue'
 import type { SleeveT } from '../types/sleeve'
-import { DialogKind } from '../types/enums'
+import { DialogKind, Themes } from '../types/enums'
 
 export const useGlobalState = createGlobalState(
     () => {
@@ -14,7 +14,9 @@ export const useGlobalState = createGlobalState(
                 kind: DialogKind,
                 context: SleeveT | null
             },
+            theme:Themes
             isLoggedIn: boolean
+
         } = reactive({
             board: [],
             board_id: 0,
@@ -23,7 +25,8 @@ export const useGlobalState = createGlobalState(
                 kind: DialogKind.None,
                 context: null
             },
-            isLoggedIn: false,
+            theme: Themes.Default,
+            isLoggedIn: false
         })
 
         let setBoard = (_board: SleeveT[], _board_id: number) => {
@@ -63,6 +66,27 @@ export const useGlobalState = createGlobalState(
             return state.dialog.context
         }
 
+        const getTheme = () => state.theme
+
+        const setTheme = (newTheme: Themes) => {
+            state.theme = newTheme
+
+            const head = document.head
+            const existingLink = document.getElementById('theme-link') as HTMLLinkElement
+
+            if (existingLink) {
+                head.removeChild(existingLink)
+            }
+
+            if (state.theme === Themes.None) return
+
+            const link = document.createElement('link')
+            link.id = 'theme-link'
+            link.rel = 'stylesheet'
+            link.href = `../css/${state.theme === Themes.Midnight ? 'style-midnight.css' : 'style.css'}`
+
+            head.appendChild(link);
+        }
 
         return { state, getItem, addItem, removeItem,
             showDialog, setDialog, getDialogContext,

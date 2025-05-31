@@ -7,10 +7,9 @@ export enum DialogKind {
 }
 
 export enum Themes {
-    Debug,
-    Pinkish,
-    Placeholder,
-    None
+    Default = 'Default',
+    Midnight = 'Midnight',
+    None = 'None'
 }
 
 export enum Languages {

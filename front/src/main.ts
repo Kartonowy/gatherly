@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import '../css/style-midnight.css'
+import '../css/style.css'
 
 import { createMemoryHistory, createRouter } from 'vue-router'
 

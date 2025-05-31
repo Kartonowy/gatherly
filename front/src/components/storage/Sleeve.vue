@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Label from './Label.vue';
 import ContextButton from './ContextButton.vue';
+import Tag from './Tag.vue';
 
 import { useDraggable, useElementHover, type Position } from '@vueuse/core';
 import {ref, useTemplateRef, watch} from 'vue';

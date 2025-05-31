@@ -1,13 +1,14 @@
 import { ref, type Ref } from "vue"
-import type { Position } from "./types"
+import type { Position, TagT } from "./types"
 
 export class SleeveT {
     label: Ref<string>
     url: Ref<string>
     position: Position
     sleevekey: PropertyKey
+    tags:TagT[]
     summary: Ref<string>
-    tags: string[]
+    tagse: string[]
     changePos?: (newx: number, newy: number) => void
     changeItem: (label: string, url: string) => void
     private _onMount: (() => void)[]
@@ -19,6 +20,7 @@ export class SleeveT {
         this.url = ref(_url);
         this.summary = ref("")
         this.position = { x: 0, y: 0 }
+        this.tags = []
         this.changePos = _changePos
         this._onMount = []
         this.tags = []

@@ -1,15 +1,13 @@
 <script setup lang="ts">
+import { defineProps } from 'vue';
+import type {TagT} from '../../types/types.ts';
 
 const props = defineProps<{
-  color: string
+    tags?: TagT
 }>()
 
 </script>
-
 <template>
-  <div style="height: 10px; width: 10px; border-radius: 50%" :style="'background-color:' + color "></div>
+    <div :style="'background-color: ' + tags?.bgColor" style="width:10px; height: 10px; border-radius: 50%;"></div>
 </template>
 
-<style scoped>
-
-</style>

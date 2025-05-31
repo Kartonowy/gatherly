@@ -1,52 +1,55 @@
 <script setup lang="ts">
-import type {Ref} from "vue";
-import type {TagT} from "../../types/types.ts";
-import Tag from "./Tag.vue";
+import type {Ref} from 'vue';
+import Tag from './Tag.vue';
 
 const props = defineProps<{
-  textRaw: string
+    textRaw?:Ref<string>
 }>()
 
-const tags: TagT[] = [
-  {
-    color: "#692137"
-  },
-  {
-    color: "#b4dd1e"
-  },
-  {
-    color: "#299321"
-  },
+const tags = [
+    {
+        bgColor: '#d582ae',
+        name: 'xd'
+    },
+    {
+        bgColor: '#5a5dbc',
+        name: 'xd2'
+    },
+    {
+        bgColor: '#c4391d',
+        name: 'xd3'
+    }
+
 ]
 
 </script>
 
 <template>
-  <div class="label">
-    <p>{{ textRaw }}</p>
-    <div class="tags">
-      <Tag  v-for="tag in tags" :color="tag.color"/>
-    </div>
-  </div>
+        <p>{{ props.textRaw }}
+            <div class="tags">
+                <Tag v-for="tag in tags" :tags="tag"/>
+            </div>
+        </p>
 </template>
 
 <style scoped lang="scss">
-.label {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+    p{
+        height: 2vh;
+        width:10vw;
+        display: flex;
+        flex-direction: row;
+        padding-left: 5px;
+        justify-content: space-between;
+        align-items: center;
 
-  p {
-    width: 60%;
-  }
-  .tags {
-    width: 40%;
-    display: flex;
-    flex-direction: row;
-    align-content: center;
-    justify-content: flex-start;
-  }
-}
-
+        .tags{
+            width:4vw;
+            height: 2vh;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 2px;
+            margin-right: 15px;
+        }
+    }
 </style>
