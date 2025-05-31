@@ -3,14 +3,19 @@
 import {useGlobalState} from "../../scripts/state.ts";
 import {ref} from "vue";
 import {SleeveT} from "../../types/sleeve.ts";
+import {insertSleeve} from "../../scripts/api.ts";
 
 const { addItem, getDialogContext, showDialog } = useGlobalState()
 
 const label = ref(getDialogContext()?.label??"");
 const url = ref(getDialogContext()?.url??"")
+const summary = ref(getDialogContext()?.summary??"");
 
-function onSubmit() {
-  addItem(new SleeveT(label.value, url.value));
+async function onSubmit() {
+  const s = new SleeveT(label.value, url.value)
+  s.summary = summary
+  await insertSleeve(s)
+  addItem(s);
   showDialog(false)
 }
 
@@ -26,6 +31,10 @@ function onSubmit() {
     <label for="url">
       url:
       <input type="url" name="url" id="url" v-model="url">
+    </label>
+    <label for="summary">
+      summary:
+      <textarea name="summary" id="summary" cols="30" rows="10" v-model="summary" />
     </label>
     <input @click.prevent="onSubmit" type="button" value="Add" id="submit">
   </form>

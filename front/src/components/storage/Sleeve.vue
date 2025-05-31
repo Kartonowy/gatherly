@@ -4,7 +4,7 @@ import ContextButton from './ContextButton.vue';
 import Tag from './Tag.vue';
 
 import { useDraggable, useElementHover, type Position } from '@vueuse/core';
-import {type Ref, ref, type ShallowRef, useTemplateRef, watch} from 'vue';
+import {ref, useTemplateRef, watch} from 'vue';
 import type { SleeveT } from '../../types/sleeve';
 import ContextWindow from "./ContextWindow.vue";
 
@@ -63,6 +63,8 @@ sleeve.changePos = (newx: number, newy: number) => {
     x.value = newx
     y.value = newy
 }
+
+sleeve.invoke()
 
 
 </script>

@@ -10,3 +10,4 @@ const props = defineProps<{
 <template>
     <div :style="'background-color: ' + tags?.bgColor" style="width:10px; height: 10px; border-radius: 50%;"></div>
 </template>
+

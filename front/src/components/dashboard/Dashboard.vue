@@ -3,6 +3,7 @@ import sort from '../../scripts/sort';
 import {sleeves} from '../../utils/dummy';
 import {useGlobalState} from '../../scripts/state';
 import { DialogKind } from '../../types/enums';
+import {getBoards} from "../../scripts/api.ts";
 
 const { addItem, showDialog, setDialog } = useGlobalState()
 type TileBindable = [
@@ -12,7 +13,7 @@ type TileBindable = [
 
 const tiles: TileBindable[] = [
     ["add", () => {
-      setDialog(DialogKind.SleeveAdd, null);
+      setDialog(DialogKind.Sleeve, null);
       showDialog(true);
     }],
     ["sort", sort],
@@ -21,8 +22,8 @@ const tiles: TileBindable[] = [
       setDialog(DialogKind.Auth, null);
       showDialog(true);
     }],
-    ["dialog", () => {
-      setDialog(DialogKind.SleeveEdit, null);
+    ["board", () => {
+      setDialog(DialogKind.Board, null);
       showDialog(true);
     }],
     ["???", () => {

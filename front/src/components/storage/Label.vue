@@ -19,6 +19,7 @@ const tags = [
         bgColor: '#c4391d',
         name: 'xd3'
     }
+
 ]
 
 </script>

@@ -9,7 +9,7 @@ const { state } = useGlobalState()
 
 <template>
 
-    <div class="sleeve-storage" v-for="item in state.items">
+    <div class="sleeve-storage" v-for="item in state.board">
         <Sleeve :key="item.sleevekey!" :item="item" />
     </div>
 
