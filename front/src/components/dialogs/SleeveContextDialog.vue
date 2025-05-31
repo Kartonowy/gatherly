@@ -1,39 +1,50 @@
 <script setup lang="ts">
+import { nextTick, onMounted, ref } from "vue";
+import { useGlobalState } from "../../scripts/state.ts";
+import { SleeveT } from "../../types/sleeve.ts";
+import { insertSleeve, updateSleeve } from "../../scripts/api.ts";
 
-import {useGlobalState} from "../../scripts/state.ts";
-import {ref} from "vue";
-import {SleeveT} from "../../types/sleeve.ts";
-import {insertSleeve, updateSleeve} from "../../scripts/api.ts";
-
-const { addItem, getDialogContext, showDialog } = useGlobalState()
+const { addItem, getDialogContext, showDialog } = useGlobalState();
 
 let label = ref("");
-let url = ref("")
+let url = ref("");
 let summary = ref("");
+let loaded = ref(false);
 
+let context = getDialogContext();
 
-const context = getDialogContext()
-
-if (context == null) {
-    const context = new SleeveT(label.value, url.value)
-    context.summary = summary
-    await insertSleeve(context)
-    addItem(context);
-} else {
+onMounted(async () => {
+  if (context == null) {
+    console.log("context is null");
+    const newSleeve = new SleeveT(label.value, url.value);
+    newSleeve.summary = summary;
+    await insertSleeve(newSleeve);
+    addItem(newSleeve);
+    console.log("Added item");
+    loaded.value = true;
+    context = newSleeve
+  } else {
+    console.log("context is not null");
     label = context.label;
     url = context.url;
     summary = context.summary;
-}
+    loaded.value = true;
+  }
+});
 
 async function onSubmit() {
-  await updateSleeve(context!)
+    context!.url = url
+    context!.label = label
+    context!.summary = summary
+    await updateSleeve(context!);
+    nextTick()
 }
-console.log("chuj")
 
+console.log("chuj");
 </script>
 
 <template>
-  <form>
+  <form v-if="loaded">
     <label for="label">
       label:
       <input type="text" name="label" id="label" v-model="label">

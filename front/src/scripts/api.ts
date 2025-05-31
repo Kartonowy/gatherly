@@ -89,7 +89,7 @@ export const logout = () => {
 export async function insertSleeve(s: SleeveT) {
     const {getBoardId} = useGlobalState()
     try {
-        const {key} = (await axios.post("http://127.0.0.1:3000/api/add-sleeve", {
+        const res = await axios.post("http://127.0.0.1:3000/api/add-sleeve", {
             sleeve: {
                 name: s.label,
                 url: s.url,
@@ -105,8 +105,7 @@ export async function insertSleeve(s: SleeveT) {
             },
             withCredentials: true
         })
-        ).data
-        s.sleevekey = key
+        s.sleevekey = res.data.key
     }
     catch (e) {
         console.log(e)
@@ -117,8 +116,8 @@ export async function updateSleeve(s: SleeveT) {
     await axios.post("http://127.0.0.1:3000/api/edit-sleeve/", {
             id: Number(s.sleevekey),
             sleeve: {
-                name: s.label,
-                url: s.url,
+                name: s.label.value,
+                url: s.url.value,
                 summary: "",
                 tags: s.tags,
             }
@@ -141,4 +140,18 @@ export async function deleteSleeve(s: SleeveT) {
             withCredentials: true
         }
     )
+}
+
+export async function addBoard(name: string) {
+    const res = await axios.post("http://127.0.0.1:3000/api/add-board/", {
+            name: name
+        }, {
+            headers: {
+                "Content-Type": "application/json",
+            },
+            withCredentials: true
+        }
+    )
+
+    return res.data.id
 }

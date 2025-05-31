@@ -4,7 +4,7 @@ import type {TagT} from "../../types/types.ts";
 import Tag from "./Tag.vue";
 
 const props = defineProps<{
-  textRaw: Ref<string>
+  textRaw: string
 }>()
 
 const tags: TagT[] = [

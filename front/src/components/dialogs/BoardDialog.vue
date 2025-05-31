@@ -2,7 +2,7 @@
 
 import {useGlobalState} from "../../scripts/state.ts";
 import {SleeveT} from "../../types/sleeve.ts";
-import {getBoard, getBoards} from "../../scripts/api.ts";
+import {addBoard, getBoard, getBoards} from "../../scripts/api.ts";
 import {onMounted, ref, watch} from "vue";
 import axios from "axios";
 
@@ -49,6 +49,12 @@ onMounted(async () => {
   await fetchBoards()
 })
 
+let boardN = ref("")
+
+const oNaddBoard = async () => {
+    await addBoard(boardN.value)
+}
+
 </script>
 
 <template>
@@ -59,6 +65,12 @@ onMounted(async () => {
     </select>
     <div v-if="error">{{ error }}</div>
   </div>
+
+    <div>
+        Add board
+        <input v-model="boardN" name="dialog" />
+        <button @click="oNaddBoard">Add</button>
+    </div>
 </template>
 
 <style scoped>

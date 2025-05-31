@@ -5,6 +5,7 @@ import {boardsTable, sleeveTable, usersTable} from "../db/schema.js";
 import {db} from "../db/index.js";
 import {eq, or} from "drizzle-orm";
 import * as argon2 from "argon2";
+import cors from "@elysiajs/cors";
 
 
 
@@ -135,6 +136,26 @@ export const APIrouter = new Elysia({ prefix: "/api" })
                 id: t.String()
             })
         })
+    .post("/add-board", async ({body, jwt, headers, set}: any) => {
+
+        const authHeader: string = headers["authorization"]
+
+        if (!authHeader) {
+            set.status = 401
+            console.log("No authHeader found")
+            return "Unauthorized"
+        }
+
+        const user = await jwt.verify(authHeader.split(" ")[1])
+
+        const res = await db.insert(boardsTable).values({
+            name: body.name,
+            owner: user.id
+    }).returning()
+
+    const { id } = res[0]
+    return { id }
+})
     .post("/sleeve", async ({body}: any) => {
         return db.select().from(sleeveTable).where(eq(sleeveTable.board, Number(body.board_id)));
     }, {
@@ -142,19 +163,13 @@ export const APIrouter = new Elysia({ prefix: "/api" })
             board_id: t.Number()
         })
     })
+    .use(cors())
     .post("/add-sleeve", async ({body}: any) => {
-        console.log("cos")
         const s = await db.insert(sleeveTable).values([{...body.sleeve}]).returning()
             return {
                 key: s[0].id
             }
-    },
-        {
-            body: t.Omit(
-                _createSleeve,
-                ["id", "board_id"]
-            )
-        })
+    })
     .post("/edit-sleeve/", async ({body}: any) => {
         await db.update(sleeveTable)
             .set({
